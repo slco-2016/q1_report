@@ -354,9 +354,9 @@
 
         if (!(isNaN(val) || val == 0)) {
           var single = {
-            "category": cleanName(col[0]),
-            "subcat": cleanName(col[1]),
-            "key": cleanName(col[2]),
+            "category": col[0],
+            "subcat": col[1],
+            "key": col[2],
             "value": val
           }
           res.push(single);
@@ -366,7 +366,80 @@
       }
 
       var res = d3.nest().key(function (d) { return d.category; }).key(function(d) { return d.subcat; }).entries(res);
-      main({title: "Study Population"}, {key: "All Users", values: res});
+
+      srtd = {};
+      var cols = Object.keys(data[0]);
+
+      for (var i = 0; i < cols.length; i++) {
+        var col = cols[i].split("_")[0];
+        var name = cols[i].split("_")[1];
+
+        if (!srtd[col]) { srtd[col] = []; }
+        if (name) { srtd[col].push(name); }
+      }
+
+      tree = {"name": "total", "children": []};
+
+      for (var sub in srtd) {
+        var subObj = {"name": sub, "children": []}
+
+        for (var i=0; i < srtd[sub].length; i++) {
+          var attr = srtd[sub][i];
+          var colName = sub + "_" + attr;
+          var colCt = 0;
+
+          for (var n=1; n < data.length; n++) {
+            var v = Number(data[n][colName]);
+            if (!isNaN (v)) { colCt += v; }
+          }
+
+          if (colCt > 0) { subObj.children.push({"name": cleanName(attr), count: colCt}); }
+        }
+
+        if (sub == "attitude") {
+          var altChildren = {"supervision": [], "recidivism": [], "organization": [], "other": []};
+          subObj.children.forEach(function (ea) {
+            var n = ea.name.toLowerCase();
+            var cat = "other";
+            if (inList(n, ["resigned", "respectful", "blames", "angry", "motivated", "optimistic"])) { cat = "supervision"; } 
+            else if (inList(n, ["never", "fearful", "indifferent"])) { cat = "recidivism"; } 
+            else if (inList(n, ["understands", "confused", "overwhelmed", "savvy"])) { cat = "organization"; }
+            altChildren[cat].push(ea);
+          });
+          subObj.children = [];
+          for (var key in altChildren) { if (altChildren[key].length > 0) { subObj.children.push({ "name": key, "children": altChildren[key] }); } }
+        }
+        tree.children.push(subObj);
+      }
+
+      // node = root = tree;
+
+      // nodes = treemap.nodes(root)
+      //     .filter(function(d) { return !d.children; });
+
+      // cell = svg.selectAll("g")
+      //     .data(nodes)
+      //     .enter();
+
+      // cell.append("svg:g")
+      //       .attr("class", "cell")
+      //       .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+      //       .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); });
+
+      // cell.append("svg:rect")
+      //     .attr("width", function(d) { return Math.max(d.dx - 1, 0); })
+      //     .attr("height", function(d) { return Math.max(d.dy - 1, 0); })
+      //     .style("fill", function(d) { return color(d.parent.name); });
+
+      // cell.append("svg:text")
+      //     .attr("x", function(d) { return d.dx / 2; })
+      //     .attr("y", function(d) { return d.dy / 2; })
+      //     .attr("dy", ".35em")
+      //     .attr("text-anchor", "middle")
+      //     .text(function(d) { return d.name; })
+      //     .style("opacity", function(d) { d.w = this.getComputedTextLength(); return d.dx > d.w ? 1 : 0; });
+
+      // d3.select(window).on("click", function() { zoom(root); });
 
     };
 
@@ -380,6 +453,11 @@
 
     function cleanName (n) {
       n = String(n);
+
+      if (n == "1824") { return "18-24"; }
+      if (n == "2534") { return "25-34"; }
+      if (n == "3544") { return "35-44"; }
+      if (n == "4554") { return "45-54"; }
 
       if (n == "female") { return "Female"; }
       if (n == "male") { return "Male"; }
