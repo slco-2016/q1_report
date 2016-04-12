@@ -1,24 +1,243 @@
 <!DOCTYPE html>
 <html>
-   <head>
-       <title>CFA: Team Salt Lake Q1 Report</title>
+  <head>
+    <title>CFA: Team Salt Lake Q1 Report</title>
 
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.4.3/tabletop.min.js"></script>
-   </head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.4.3/tabletop.min.js"></script>
+  <script src="//d3js.org/d3.v3.min.js"></script>
 
-   <body>
+  </head>
+
+  <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      margin: 0px;
+      padding: 0px;
+      overflow-x: hidden;
+    }
+    form {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+    .chart {
+      display: block;
+      margin: auto;
+      margin-top: 40px;
+    }
+    text {
+      fill: #FFF;
+      font-size: 11px;
+    }
+    rect {
+      fill: none;
+    }
+  </style>
+
+
+  <body>
+
+    <select name="cars">
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+      <option value="fiat">Fiat</option>
+      <option value="audi">Audi</option>
+    </select>
+
+    <button onlick="resetWeights">Reset Weighting</button>
 
   </body>
 
   <script type="text/javascript">
 
-    window.onload = function() { init() };
-
-    function init() {
-      Tabletop.init( { key: '1lwRdH1d-k1HkV0P9VH4HfOlKtdLj5ygccfakre-__Eo',
-                       callback: function(data, tabletop) { console.log(data) },
-                       simpleSheet: true } )
+    window.onload = function () {
+      Tabletop.init({ 
+        key: '1lwRdH1d-k1HkV0P9VH4HfOlKtdLj5ygccfakre-__Eo',
+        callback: function (data, tabletop) { configure(data); },
+        simpleSheet: true 
+      });
     };
+
+    var width = window.innerWidth,
+        height = window.innerHeight - 50,
+        x = d3.scale.linear().range([0, width]),
+        y = d3.scale.linear().range([0, height]);
+
+    var color = d3.scale.category20c();
+
+    var treemap = d3.layout.treemap()
+        .round(false)
+        .size([width, height])
+        .sticky(true)
+        .value(function (d) { return d.count; });
+
+    var svg = d3.select("body").append("div")
+        .attr("class", "chart")
+        .style("width", width + "px")
+        .style("height", height + "px")
+        .append("svg:svg")
+          .attr("width", width)
+          .attr("height", height)
+        .append("svg:g")
+          .attr("transform", "translate(.5,.5)");
+
+    function configure (data) {
+      srtd = {};
+      var cols = Object.keys(data[0]);
+
+      for (var i = 0; i < cols.length; i++) {
+        var col = cols[i].split("_")[0];
+        var name = cols[i].split("_")[1];
+
+        if (!srtd[col]) { srtd[col] = []; }
+        if (name) { srtd[col].push(name); }
+      }
+
+      tree = {name: "total", children: []};
+
+      for (var sub in srtd) {
+        var subObj = {name: sub, children: []}
+
+        for (var i=0; i < srtd[sub].length; i++) {
+          var attr = srtd[sub][i];
+          var colName = sub + "_" + attr;
+          var colCt = 0;
+
+          for (var n=1; n < data.length; n++) {
+            var v = Number(data[n][colName]);
+            if (!isNaN (v)) { colCt += v; }
+          }
+
+          if (colCt > 0) { subObj.children.push({name: cleanName(attr), count: colCt}); }
+        }
+
+        if (sub == "attitude") {
+          var altChildren = {"supervision": [], "recidivism": [], "organization": [], "other": []};
+          subObj.children.forEach(function (ea) {
+            var n = ea.name.toLowerCase();
+            var cat = "other";
+            if (inList(n, ["resigned", "respectful", "blames", "angry", "motivated", "optimistic"])) { cat = "supervision"; } 
+            else if (inList(n, ["never", "fearful", "indifferent"])) { cat = "recidivism"; } 
+            else if (inList(n, ["understands", "confused", "overwhelmed", "savvy"])) { cat = "organization"; }
+            altChildren[cat].push(ea);
+          });
+          subObj.children = [];
+          for (var key in altChildren) { if (altChildren[key].length > 0) { subObj.children.push({ name: key, children: altChildren[key] }); } }
+        }
+        tree.children.push(subObj);
+      }
+      
+      node = root = tree;
+
+      nodes = treemap.nodes(root)
+          .filter(function(d) { return !d.children; });
+
+      var cell = svg.selectAll("g")
+          .data(nodes)
+        .enter().append("svg:g")
+          .attr("class", "cell")
+          .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+          .on("click", function(d) { return zoom(node == d.parent ? root : d.parent); });
+
+      cell.append("svg:rect")
+          .attr("width", function(d) { return d.dx - 1; })
+          .attr("height", function(d) { return d.dy - 1; })
+          .style("fill", function(d) { return color(d.parent.name); });
+
+      cell.append("svg:text")
+          .attr("x", function(d) { return d.dx / 2; })
+          .attr("y", function(d) { return d.dy / 2; })
+          .attr("dy", ".35em")
+          .attr("text-anchor", "middle")
+          .text(function(d) { return d.name; })
+          .style("opacity", function(d) { d.w = this.getComputedTextLength(); return d.dx > d.w ? 1 : 0; });
+
+      d3.select(window).on("click", function() { zoom(root); });
+
+    };
+
+    function inList (word, list) {
+      var ok = false;
+      list.forEach(function (ea) {
+        if (word.indexOf(ea) > -1) ok = true;
+      });
+      return ok;
+    }
+
+    function cleanName (n) {
+      n = String(n);
+
+      if (n == "1824") { return "Ages 18-24"; }
+      if (n == "2534") { return "Ages 25-34"; }
+      if (n == "3544") { return "Ages 35-44"; }
+      if (n == "4554") { return "Ages 45-54"; }
+
+      if (n == "female") { return "Gender Female"; }
+      if (n == "male") { return "Gender Male"; }
+
+      if (n == "probation") { return "Probation"; }
+      if (n == "pretrial") { return "Pretrial"; }
+
+      if (n == "fearful") { return "Fearful Attitude"; }
+      if (n == "respectful") { return "Respectful Attitude"; }
+      if (n == "resigned") { return "Resigned Attitude"; }
+      if (n == "indifferent") { return "Indifferent Attitude"; }
+      if (n == "optimistic") { return "Optimistic Attitude"; }
+      if (n == "blamessys") { return "Blames the System"; }
+      if (n == "angry") { return "Angry Attitude"; }
+      if (n == "understandsreqs") { return "Understands the Requirements"; }
+      if (n == "confused") { return "Confused Attitude"; }
+      if (n == "overwhelmed") { return "Overwhelmed Attitude"; }
+      if (n == "neveragain") { return "Used Phrase 'Never Again'"; }
+
+      else { return n; }
+    };
+
+    function resetWeights () {
+      var ct = function (d) { return d.count; };
+      var ot = function (d) { return 1; };
+      var value = (this.value === "count") ? ct : ot;
+
+      updateWeighting(value);
+    };
+
+    function updateWeighting (value) {
+      node
+        .data(treemap.value(value).nodes)
+        .transition()
+        .duration(1500)
+        .call(position);
+    };
+
+    function position () {
+      this.style("left", function (d) { return d.x + "px"; })
+          .style("top", function (d) { return d.y + "px"; })
+          .style("width", function (d) { return Math.max(0, d.dx - 1) + "px"; })
+          .style("height", function (d) { return Math.max(0, d.dy - 1) + "px"; });
+    };
+
+    function zoom(d) {
+      var kx = width / d.dx, ky = height / d.dy;
+      x.domain([d.x, d.x + d.dx]);
+      y.domain([d.y, d.y + d.dy]);
+
+      var t = svg.selectAll("g.cell").transition()
+          .duration(d3.event.altKey ? 7500 : 750)
+          .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+      t.select("rect")
+          .attr("width", function(d) { return kx * d.dx - 1; })
+          .attr("height", function(d) { return ky * d.dy - 1; })
+
+      t.select("text")
+          .attr("x", function(d) { return kx * d.dx / 2; })
+          .attr("y", function(d) { return ky * d.dy / 2; })
+          .style("opacity", function(d) { return kx * d.dx > d.w ? 1 : 0; });
+
+      node = d;
+      d3.event.stopPropagation();
+    }
+
 
   </script>
 
