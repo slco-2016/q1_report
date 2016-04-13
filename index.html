@@ -20,7 +20,7 @@
       font-family: 'Source Sans Pro', sans-serif;
       margin: 0px;
       padding: 0px;
-      overflow: hidden;
+      overflow-x: hidden;
       background-color: #152c33;
       color: #FFF;
     }
@@ -106,7 +106,7 @@
 
     .hexagon:hover {
       transition: all .2s ease-in-out;
-      transform: scale(1.1);
+      transform: scale(0.9);
     }
 
     .hexagon.one { background: #ffd000; }
@@ -124,6 +124,10 @@
     .hexagon.four { background: #ff6500; }
     .hexagon.four:before { border-bottom: 40px solid #ff6500; }
     .hexagon.four:after { border-top: 40px solid #ff6500; }
+
+    .hexagon.five { background: #cc5000; }
+    .hexagon.five:before { border-bottom: 40px solid #cc5000; }
+    .hexagon.five:after { border-top: 40px solid #cc5000; }
 
     .map {
       position: fixed;
@@ -156,27 +160,42 @@
     <div class="menu-box">
       <div class="hex" onclick="mapModalToggle()"><div class="hexagon one" style="left: 0px; z-index: 100">
         <i class="fa fa-map"></i><br>
-        About
+        Where
       </div></div>
+
       <div class="hex"><div class="hexagon two" style="left: 75px; top: 135px">
         <i class="fa fa-search"></i><br>
-        Study Methods
+        Methodology
       </div></div>
+
       <div class="hex"><div class="hexagon three" style="left: 225px; top: 135px">
         <i class="fa fa-book"></i><br>
         Results Guide
       </div></div>
-      <a href="/boxes.html">
-        <div class="hex"><div class="hexagon four" style="left: 300px; top: 270px">
-          <i class="fa fa-database"></i><br>
-          Explore Data
-        </div></div>
-      </a>
+
+      <div class="hex"><div class="hexagon five" id="datahex0" onclick="toggleDataHex()" style="left: 300px; top: 270px">
+        <i class="fa fa-database"></i><br>
+        Explore Data
+      </div></div>
+
+      <div class="hex" id="datahex1"><div class="hexagon four" style="left: 375px; top: 405px;">
+        <i class="fa fa-pagelines"></i><br>
+        Tree Diagram
+      </div></div>
+
+      <div class="hex" id="datahex2">
+        <a href="/boxes.html">
+          <div class="hexagon four" style="left: 450px; top: 270px;">
+            <i class="fa fa-th"></i><br>
+            Box Diagram
+          </div>
+        </a>
+      </div>
     </div>
 
     <div class="map" style="display:none;">
       <span onclick="mapModalToggle()" style="right:25px;position:absolute;z-index:99999">
-        <i class="fa fa-times-circle" style="color:#060d0f;cursor:pointer"></i>
+        <i class="fa fa-times-circle" style="color:#152c33;text-shadow:0px 0px 6px rgba(0,0,0,0.4); cursor:pointer"></i>
       </span>
       <div id="map"></div>
     </div>
@@ -192,19 +211,31 @@
 
   <script type="text/javascript">
     window.onload = function () {
-      var dy = Math.round((window.innerHeight - 360)/2);
-      console.log(window.innerHeight, dy);
+      var dy = Math.round((window.innerHeight - 450)/2);
       if (dy > 0) $(".menu-box").css("margin-top", dy + "px");
+      toggleDataHex();
     };
 
     var map;
 
-    function mapModalToggle () { 
+    function mapModalToggle () {
       $(".map").toggle("fade", function () { if (!map) drawMap(); });
-    }
+    };
+
+    function toggleDataHex () { 
+      var classFour = $("#datahex0").hasClass("four");
+      if (classFour) {
+        $("#datahex0").addClass("five");
+        $("#datahex0").removeClass("four");
+      } else {console.log("hasClas22s")
+        $("#datahex0").addClass("four");
+        $("#datahex0").removeClass("five");
+      }
+      $("#datahex1").fadeToggle(function () { $("#datahex2").fadeToggle(); });
+    };
 
     function drawMap () {
-      var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',{attribution: ""});
+      var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{attribution: ""});
       map = L.map("map", {
         scrollWheelZoom: false,
         center: [40.6908, -111.8910],
