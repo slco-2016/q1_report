@@ -183,7 +183,9 @@
 
     <div class="title">
       <div class="big"><a href="/">Phase 1 Research Review</a></div>
-       <div class="sub"><a href="http://c4a-slc.tumblr.com/">Code for America: 2016 Team Salt Lake</a></div>
+       <div class="sub"><a href="http://c4a-slc.tumblr.com/">
+        Code for America: 2016 Team Salt Lake
+      </a></div>
     </div>
 
   </body>
@@ -205,8 +207,8 @@
       var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',{attribution: ""});
       map = L.map("map", {
         scrollWheelZoom: false,
-        center: [40.7608, -111.8910],
-        zoom: 12
+        center: [40.6908, -111.8910],
+        zoom: 10
       });
 
       map.addLayer(layer);
@@ -219,6 +221,22 @@
         {latlng: [40.763339, -111.904101], name: "Homeless User Interviews"},
         {latlng: [40.764428, -111.904680], name: "Road Home"},
         {latlng: [40.759168, -111.881585], name: "Salt Lake City Police Department"},
+        {latlng: [40.760896, -111.882776], name: "HackNight SLC"},
+        {latlng: [40.759486, -111.886587], name: "OpenSLC"},
+        {latlng: [40.698867, -111.916213], name: "Sheriff Winder and Deputy Chief Lofgreen"},
+        {latlng: [40.696710, -111.914882], name: "County Metro Jail"},
+        {latlng: [40.726604, -111.887450], name: "Salt Lake County Information Systems"},
+        {latlng: [40.726277, -111.887446], name: "Mayor Ben McAdams"},
+        {latlng: [40.727944, -111.887714], name: "Salt Lake County Registrar"},
+        {latlng: [40.728502, -111.875545], name: "Code for America Team Salt Lake County"},
+        {latlng: [40.485133, -111.895048], name: "Adult Parole and Probation"},
+        {latlng: [40.570915, -111.895366], name: "Sandy Police Department"},
+        {latlng: [40.570475, -111.896085], name: "LEADS Meeting"},
+        {latlng: [40.760865, -111.902913], name: "Homeless Outreach"},
+        {latlng: [40.758516, -111.889169], name: "Veterans Court"},
+        {latlng: [40.764253, -111.891304], name: "Goldman Sachs"},
+        {latlng: [40.759294, -111.884079], name: "Homeless Outreach"},
+
       ].forEach(function (ea) {console.log(ea.name);
         L.circle(ea.latlng, 150, {
           color: "orange", fillColor: "#e69500", fillOpacity: 0.5
