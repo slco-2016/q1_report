@@ -60,6 +60,27 @@
       font-weight: 900;
     }
 
+    .about {
+      position: fixed;
+      bottom: 0px;
+    }
+
+    .about .text {
+      float: left;
+      padding: 10px;
+      padding-bottom: 0px;
+      margin-bottom: 0px;
+      background-color: #2b5b69;
+      overflow: hidden;
+      height: 40px;
+      overflow-y: scroll;
+    }
+
+    .about .text a {
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
     .menu-box {
       margin: 0 auto;
       margin-top: 10%;
@@ -113,9 +134,17 @@
     .hexagon.one:before { border-bottom: 40px solid #ffd000; }
     .hexagon.one:after { border-top: 40px solid #ffd000; }
 
+    .hexagon.one-alt { background: #d2ab00; }
+    .hexagon.one-alt:before { border-bottom: 40px solid #d2ab00; }
+    .hexagon.one-alt:after { border-top: 40px solid #d2ab00; }
+
     .hexagon.two { background: #ffba00; }
     .hexagon.two:before { border-bottom: 40px solid #ffba00; }
     .hexagon.two:after { border-top: 40px solid #ffba00; }
+
+    .hexagon.two-alt { background: ##e6a700; }
+    .hexagon.two-alt:before { border-bottom: 40px solid ##e6a700; }
+    .hexagon.two-alt:after { border-top: 40px solid ##e6a700; }
 
     .hexagon.three { background: #ff9000; }
     .hexagon.three:before { border-bottom: 40px solid #ff9000; }
@@ -125,9 +154,9 @@
     .hexagon.four:before { border-bottom: 40px solid #ff6500; }
     .hexagon.four:after { border-top: 40px solid #ff6500; }
 
-    .hexagon.five { background: #cc5000; }
-    .hexagon.five:before { border-bottom: 40px solid #cc5000; }
-    .hexagon.five:after { border-top: 40px solid #cc5000; }
+    .hexagon.four-alt { background: #cc5000; }
+    .hexagon.four-alt:before { border-bottom: 40px solid #cc5000; }
+    .hexagon.four-alt:after { border-top: 40px solid #cc5000; }
 
     .map {
       position: fixed;
@@ -158,22 +187,42 @@
   <body>
 
     <div class="menu-box">
-      <div class="hex" onclick="mapModalToggle()"><div class="hexagon one" style="left: 0px; z-index: 100">
+
+      <!-- ABOUT SEC -->
+      <div class="hex"><div class="hexagon one-alt" id="abouthex0" onclick="toggleAboutHex()" style="left: 0px; z-index: 100">
+        <i class="fa fa-info-circle"></i><br>
+        About
+      </div></div>
+
+      <div class="hex"><div class="hexagon one" id="abouthex1" style="left: -75px; top: 135px">
+        <i class="fa fa-exclamation-triangle"></i><br>
+        Challenge
+      </div></div>
+
+      <div class="hex" onclick="mapModalToggle()" id="abouthex2"><div class="hexagon one" style="left: -150px;">
         <i class="fa fa-map"></i><br>
         Where
       </div></div>
 
-      <div class="hex"><div class="hexagon two" style="left: 75px; top: 135px">
+      <!-- METHOD SEC -->
+      <div class="hex"><div class="hexagon two-alt" id="methodhex0" onclick="toggleMethodHex()" style="left: 75px; top: 135px">
         <i class="fa fa-search"></i><br>
         Methodology
       </div></div>
 
+      <div class="hex"><div class="hexagon two" id="methodhex1" style="left: 0px; top: 270px">
+        <i class="fa fa-user"></i><br>
+        User-Centered
+      </div></div>
+
+      <!-- OUTCOMES SEC -->
       <div class="hex"><div class="hexagon three" style="left: 225px; top: 135px">
         <i class="fa fa-book"></i><br>
         Results Guide
       </div></div>
 
-      <div class="hex"><div class="hexagon five" id="datahex0" onclick="toggleDataHex()" style="left: 300px; top: 270px">
+      <!-- DATA SEC -->
+      <div class="hex"><div class="hexagon four-alt" id="datahex0" onclick="toggleDataHex()" style="left: 300px; top: 270px">
         <i class="fa fa-database"></i><br>
         Explore Data
       </div></div>
@@ -207,6 +256,15 @@
       </a></div>
     </div>
 
+    <div class="about">
+      <div class="text" style="text-align: center;">
+        <i class="fa fa-question-circle" onclick="$('#abt-txt').slideToggle()" style="width: 35px; line-height: 2px; cursor: pointer; font-size: 1.75em;"></i>
+      </div>
+      <div class="text" id="abt-txt" style="min-width: 600px; width: 80%; display: none; font-size: 0.8em;">
+        <a href="https://www.codeforamerica.org/">Code for America</a> is <a href="https://www.codeforamerica.org/governments/saltlakecounty/">partnering</a> with Salt Lake County to build technology solutions to improve services and strengthen the relationship between the county and its citizens, with an aim to lower the rate at which citizens fail to appear (FTA) in court, supervision and treatment appointments in addition to lowering the recidivism rate. 
+      </div>
+    </div>
+
   </body>
 
   <script type="text/javascript">
@@ -214,6 +272,8 @@
       var dy = Math.round((window.innerHeight - 450)/2);
       if (dy > 0) $(".menu-box").css("margin-top", dy + "px");
       toggleDataHex();
+      toggleAboutHex();
+      toggleMethodHex();
     };
 
     var map;
@@ -225,13 +285,37 @@
     function toggleDataHex () { 
       var classFour = $("#datahex0").hasClass("four");
       if (classFour) {
-        $("#datahex0").addClass("five");
+        $("#datahex0").addClass("four-alt");
         $("#datahex0").removeClass("four");
-      } else {console.log("hasClas22s")
+      } else {
         $("#datahex0").addClass("four");
-        $("#datahex0").removeClass("five");
+        $("#datahex0").removeClass("four-alt");
       }
       $("#datahex1").fadeToggle(function () { $("#datahex2").fadeToggle(); });
+    };
+
+    function toggleAboutHex () { 
+      var classOne = $("#abouthex0").hasClass("one");
+      if (classOne) {
+        $("#abouthex0").addClass("one-alt");
+        $("#abouthex0").removeClass("one");
+      } else {
+        $("#abouthex0").addClass("one");
+        $("#abouthex0").removeClass("one-alt");
+      }
+      $("#abouthex1").fadeToggle(function () { $("#abouthex2").fadeToggle(); });
+    };
+
+    function toggleMethodHex () { 
+      var classTwo = $("#methodhex0").hasClass("two");
+      if (classTwo) {
+        $("#methodhex0").addClass("two-alt");
+        $("#methodhex0").removeClass("two");
+      } else {
+        $("#methodhex0").addClass("two");
+        $("#methodhex0").removeClass("two-alt");
+      }
+      $("#methodhex1").fadeToggle(function () {  });
     };
 
     function drawMap () {
