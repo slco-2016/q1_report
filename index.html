@@ -22,8 +22,29 @@
       color: #FFF;
     }
 
-    a {
+    a, a:hover, a:visited, a:active {
       text-decoration: none;
+      color: #FFF;
+    }
+
+    .title {
+      top: 25px;
+      right: 25px;
+      position: absolute;
+    }
+
+    .title .big, .title .sub {
+      display: block;
+      clear: both;
+      background-color: orange;
+      padding: 5px 10px 5px 10px;
+      margin-bottom: 10px;
+      float: right;
+    }
+
+    .title .big {
+      font-size: 2em;
+      font-weight: 900;
     }
 
     .menu-box {
@@ -101,13 +122,26 @@
       <div class="hex"><div class="hexagon one" style="left: 0px; z-index: 100">About</div></div>
       <div class="hex"><div class="hexagon two" style="left: 75px; top: 135px">Study Methods</div></div>
       <div class="hex"><div class="hexagon three" style="left: 225px; top: 135px">Results Guide</div></div>
-      <div class="hex"><div class="hexagon four" style="left: 300px; top: 270px">Explore Data</div></div>
+      <a href="/boxes.html">
+        <div class="hex"><div class="hexagon four" style="left: 300px; top: 270px">
+          Explore Data
+        </div></div>
+      </a>
+    </div>
+
+    <div class="title">
+      <div class="big"><a href="/">Phase 1 Research Review</a></div>
+       <div class="sub"><a href="http://c4a-slc.tumblr.com/">Code for America: 2016 Team Salt Lake</a></div>
     </div>
 
   </body>
 
   <script type="text/javascript">
-
+    window.onload = function () {
+      var dy = Math.round((window.innerHeight - 360)/2);
+      console.log(window.innerHeight, dy);
+      if (dy > 0) $(".menu-box").css("margin-top", dy + "px");
+    }
 
   </script>
 
