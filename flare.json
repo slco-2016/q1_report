@@ -1,0 +1,192 @@
+{
+  "name": "total",
+  "children": [
+    {
+      "name": "Goals",
+      "children": [
+        {
+          "name": "Job",
+          "count": 4
+        },
+        {
+          "name": "Children",
+          "count": 1
+        },
+        {
+          "name": "Family",
+          "count": 5
+        },
+        {
+          "name": "Sober Clean Recovery",
+          "count": 6
+        },
+        {
+          "name": "Education",
+          "count": 2
+        },
+        {
+          "name": "Quietcompletion",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "name": "Experience",
+      "children": [
+        {
+          "name": "Firsttime",
+          "count": 5
+        },
+        {
+          "name": "Multiple Times Through System",
+          "count": 16
+        },
+        {
+          "name": "Esttimesthroughsys",
+          "count": 67
+        },
+        {
+          "name": "Has or Does Have Ankle Monitor",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "name": "Age",
+      "children": [
+        {
+          "name": "18-24",
+          "count": 9
+        },
+        {
+          "name": "25-34",
+          "count": 6
+        },
+        {
+          "name": "35-44",
+          "count": 4
+        },
+        {
+          "name": "45-54",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "name": "Organizational",
+      "children": [
+        {
+          "name": "Understands Requirements",
+          "count": 14
+        },
+        {
+          "name": "Confused",
+          "count": 5
+        },
+        {
+          "name": "Overwhelmed",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "name": "Basics",
+      "children": [
+        {
+          "name": "Housing",
+          "count": 17
+        },
+        {
+          "name": "Transporation",
+          "count": 12
+        },
+        {
+          "name": "Phone",
+          "count": 21
+        }
+      ]
+    },
+    {
+      "name": "Phone",
+      "children": [
+        {
+          "name": "Android",
+          "count": 8
+        },
+        {
+          "name": "iOS",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "name": "Socialties",
+      "children": [
+        {
+          "name": "Positive",
+          "count": 17
+        },
+        {
+          "name": "Negative",
+          "count": 14
+        }
+      ]
+    },
+    {
+      "name": "Conflicts",
+      "children": [
+        {
+          "name": "Hasconflicts",
+          "count": 7
+        },
+        {
+          "name": "Overscheduled",
+          "count": 4
+        },
+        {
+          "name": "Competingsupervisionreqs",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "name": "Health",
+      "children": [
+        {
+          "name": "Mental Issues",
+          "count": 10
+        },
+        {
+          "name": "Physical Issues",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "name": "Reason",
+      "children": [
+        {
+          "name": "Mistake",
+          "count": 4
+        },
+        {
+          "name": "Calculated Intent",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "name": "Last",
+      "children": []
+    },
+    {
+      "name": "2",
+      "children": [
+        {
+          "name": "Val",
+          "count": 9897
+        }
+      ]
+    }
+  ]
+}
