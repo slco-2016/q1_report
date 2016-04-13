@@ -4,8 +4,11 @@
     <title>CFA: Team Salt Lake Q1 Report</title>
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900,300" rel="stylesheet" type='text/css'>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.4.3/tabletop.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
     <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
     <script src="//d3js.org/d3.v3.js"></script>
 
@@ -27,6 +30,12 @@
       color: #FFF;
     }
 
+    .fa {
+      padding-top: 15px;
+      padding-bottom: 5px;
+      font-size: 2.25em;
+    }
+
     .title {
       top: 25px;
       right: 25px;
@@ -40,6 +49,10 @@
       padding: 5px 10px 5px 10px;
       margin-bottom: 10px;
       float: right;
+    }
+
+    .title .big a, .title .sub a {
+      color: #152c33;
     }
 
     .title .big {
@@ -64,9 +77,8 @@
       background: orange;
       position: relative;
       text-align: center;
-      line-height: 90px;
       font-weight: 900;
-      text-shadow: 0px 0px 25px #330000;
+      text-shadow: 0px 0px 20px #330000;
       cursor: pointer;
     }
     .hexagon:before {
@@ -113,20 +125,60 @@
     .hexagon.four:before { border-bottom: 40px solid #ff6500; }
     .hexagon.four:after { border-top: 40px solid #ff6500; }
 
+    .map {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      margin-top: -250px;
+      margin-left: -350px;
+      border-radius: 5px;
+      width: 700px;
+      height: 500px;
+      padding: 10px;
+      z-index: 120;
+      background-color: #060d0f;
+    }
+
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+
+    .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+      background-color: #152c33;
+    }
+
   </style>
 
 
   <body>
 
     <div class="menu-box">
-      <div class="hex"><div class="hexagon one" style="left: 0px; z-index: 100">About</div></div>
-      <div class="hex"><div class="hexagon two" style="left: 75px; top: 135px">Study Methods</div></div>
-      <div class="hex"><div class="hexagon three" style="left: 225px; top: 135px">Results Guide</div></div>
+      <div class="hex" onclick="mapModalToggle()"><div class="hexagon one" style="left: 0px; z-index: 100">
+        <i class="fa fa-map"></i><br>
+        About
+      </div></div>
+      <div class="hex"><div class="hexagon two" style="left: 75px; top: 135px">
+        <i class="fa fa-search"></i><br>
+        Study Methods
+      </div></div>
+      <div class="hex"><div class="hexagon three" style="left: 225px; top: 135px">
+        <i class="fa fa-book"></i><br>
+        Results Guide
+      </div></div>
       <a href="/boxes.html">
         <div class="hex"><div class="hexagon four" style="left: 300px; top: 270px">
+          <i class="fa fa-database"></i><br>
           Explore Data
         </div></div>
       </a>
+    </div>
+
+    <div class="map" style="display:none;">
+      <span onclick="mapModalToggle()" style="right:25px;position:absolute;z-index:99999">
+        <i class="fa fa-times-circle" style="color:#060d0f;cursor:pointer"></i>
+      </span>
+      <div id="map"></div>
     </div>
 
     <div class="title">
@@ -141,6 +193,37 @@
       var dy = Math.round((window.innerHeight - 360)/2);
       console.log(window.innerHeight, dy);
       if (dy > 0) $(".menu-box").css("margin-top", dy + "px");
+    };
+
+    var map;
+
+    function mapModalToggle () { 
+      $(".map").toggle("fade", function () { if (!map) drawMap(); });
+    }
+
+    function drawMap () {
+      var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',{attribution: ""});
+      map = L.map("map", {
+        scrollWheelZoom: false,
+        center: [40.7608, -111.8910],
+        zoom: 12
+      });
+
+      map.addLayer(layer);
+
+      [
+        {latlng: [40.777338, -111.888040], name: "Maps on the Hill"},
+        {latlng: [40.759576, -111.887005], name: "David Litvack"},
+        {latlng: [40.759639, -111.889491], name: "CourtHack"},
+        {latlng: [40.764097, -111.903263], name: "Homeless Court"},
+        {latlng: [40.763339, -111.904101], name: "Homeless User Interviews"},
+        {latlng: [40.764428, -111.904680], name: "Road Home"},
+        {latlng: [40.759168, -111.881585], name: "Salt Lake City Police Department"},
+      ].forEach(function (ea) {console.log(ea.name);
+        L.circle(ea.latlng, 150, {
+          color: "orange", fillColor: "#e69500", fillOpacity: 0.5
+        }).addTo(map).bindPopup(ea.name);
+      });
     }
 
   </script>
