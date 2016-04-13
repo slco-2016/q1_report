@@ -12,14 +12,97 @@
   </head>
 
   <style>
+    
+    body {
+      font-family: 'Source Sans Pro', sans-serif;
+      margin: 0px;
+      padding: 0px;
+      overflow: hidden;
+      background-color: #152c33;
+      color: #FFF;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .menu-box {
+      margin: 0 auto;
+      margin-top: 10%;
+      background-color: orange;
+      width: 435px;
+    }
+
+    .hex {
+      position: absolute;
+    }
+
+    .hexagon {
+      width: 144px;
+      height: 90px;
+      background: orange;
+      position: relative;
+      text-align: center;
+      line-height: 90px;
+      font-weight: 900;
+      text-shadow: 0px 0px 25px #330000;
+      cursor: pointer;
+    }
+    .hexagon:before {
+      content: "";
+      position: absolute;
+      top: -40px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 72px solid transparent;
+      border-right: 72px solid transparent;
+      border-bottom: 40px solid orange;
+    }
+    .hexagon:after {
+      content: "";
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 72px solid transparent;
+      border-right: 72px solid transparent;
+      border-top: 40px solid orange;
+    }
+
+    .hexagon:hover {
+      transition: all .2s ease-in-out;
+      transform: scale(1.1);
+    }
+
+    .hexagon.one { background: #ffd000; }
+    .hexagon.one:before { border-bottom: 40px solid #ffd000; }
+    .hexagon.one:after { border-top: 40px solid #ffd000; }
+
+    .hexagon.two { background: #ffba00; }
+    .hexagon.two:before { border-bottom: 40px solid #ffba00; }
+    .hexagon.two:after { border-top: 40px solid #ffba00; }
+
+    .hexagon.three { background: #ff9000; }
+    .hexagon.three:before { border-bottom: 40px solid #ff9000; }
+    .hexagon.three:after { border-top: 40px solid #ff9000; }
+
+    .hexagon.four { background: #ff6500; }
+    .hexagon.four:before { border-bottom: 40px solid #ff6500; }
+    .hexagon.four:after { border-top: 40px solid #ff6500; }
 
   </style>
 
 
   <body>
 
-    <div id="chart"></div>
-    <a href="boxes.html">Box</a>
+    <div class="menu-box">
+      <div class="hex"><div class="hexagon one" style="left: 0px; z-index: 100">About</div></div>
+      <div class="hex"><div class="hexagon two" style="left: 75px; top: 135px">Study Methods</div></div>
+      <div class="hex"><div class="hexagon three" style="left: 225px; top: 135px">Results Guide</div></div>
+      <div class="hex"><div class="hexagon four" style="left: 300px; top: 270px">Explore Data</div></div>
+    </div>
 
   </body>
 
