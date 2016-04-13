@@ -24,7 +24,7 @@
     .title {
       font-size: 24px;
       text-align: center;
-      padding: 6px;
+      padding-top: 12px;
       opacity: 1;
       letter-spacing: 1px;
     }
@@ -71,11 +71,31 @@
       fill-opacity: 1;
     }
 
+    .back-btn {
+      position: absolute;
+      top: 16px;
+      right: 10px;
+      width: 76px;
+      padding: 8px 0px 8px 0px;
+      font-weight: 900;
+      color: #d9f8fd;
+      opacity: 0.75;
+      background-color: rgb(14, 90, 220);
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      opacity: 1;
+    }
+
   </style>
 
 
   <body>
     <div class="title">User Research <b>Study Results</b></div>
+    <a class="back-btn" href="/index.html">Back</a>
     <div id="chart"></div>
   </body>
 
