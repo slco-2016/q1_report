@@ -146,13 +146,13 @@
     ]}
   ]},
 
-  {"name": "Unmotivated, feels wronged", 
+  {"name": "Unmotivated and upset", 
     "quotes": [
       "Tend to be in their early twenties.",
       "Fees are a pain point.",
       "Limited follow through on appointments."
     ], "children": [
-    {"name": "Young, defiant, flaunting rules, clever", 
+    {"name": "Young, uninvested, flaunting rules, clever", 
       "quotes": [
         "[Text message notifications] would be cool. I mean, I am pretty good at it, but you never know.",
         "I'm going to go pay the [phone] bill [to top it up] right after this meeting."
@@ -167,7 +167,7 @@
       ]}
     ]},
 
-    {"name": "From California, did not know marijuana was illegal in Utah", 
+    {"name": "Claims ignorant of law prohibiting action", 
       "quotes": [
         "I was reminded last week for a dental appointment."
       ], "children": [
