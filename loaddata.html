@@ -62,7 +62,7 @@
               if (!isNaN(v)) { colCt += v; }
             }
 
-            if (colCt > 0) { subObj.children.push({ name: cleanName(attr), count: colCt }); }
+            if (colCt == 0) { subObj.children.push({ name: cleanName(attr), count: colCt }); }
           }
 
           if (subObj.children.length > 0) { catObj.children.push(subObj)}

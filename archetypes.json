@@ -1,0 +1,138 @@
+{"name": "Archetypes", "children": [
+
+  {"name": "Motivated", "children": [
+
+    {"name": "Wants to put low level crime history behind them", "children": [
+      {"name": "I know how the system works this time.", "children": [
+        {"name": "job"}, 
+        {"name": "recovery"}
+      ]},
+      {"name": "I'm a grown up this time; I’ll pass the test.", "children": [
+        {"name": "warrant cleared"}, 
+        {"name": "driver's license"}, 
+        {"name": "own vehicle"}
+      ]}
+    ]},
+
+    {"name": "Knowledgeable about system, with past trauma and recreational drug use", "children": [
+      {"name": "[This is the] the first time in a long time I'm doing good. I’m proud of myself.", "children": [
+        {"name": "recovery"}, 
+        {"name": "clean"}, 
+        {"name": "sober"}
+      ]},
+      {"name": "[My] record makes it hard to find a job.", "children": [
+        {"name": "recovery"}, 
+        {"name": "job"}
+      ]},
+      {"name": "Some people say I'm hard to get along with.", "children": [
+        {"name": "help family"}, 
+        {"name": "heal sick wife"}
+      ]}
+    ]},
+
+    {"name": "Addicted to drugs or alcohol, has positive support, desire to change lifestyle", "children": [
+      {"name": "I get into a little bit of trouble, so [I say] f*** it. That’s really the kind of attitude I get in. I’m just making it worse [and] adding to it.", "children": [
+        {"name": "sober"}
+      ]},
+      {"name": "I feel I suffer from PTSD and I feel like I don’t have an addiction.", "children": [
+        {"name": "employment"}
+      ]}
+    ]}
+
+  ]},
+
+  {"name": "Lacks clarity and support", "children": [
+
+    {"name": "Needs assurances and does not understand process", "children": [
+      {"name": "It’s so amazing how this can happen without being convicted.", "children": [
+        {"name": "move"}, 
+        {"name": "reconnect to family"}
+      ]},
+      {"name": "I feel I suffer from PTSD and I feel like I don’t have an addiction.", "children": [
+        {"name": "employment"}
+      ]}
+    ]},
+
+    {"name": "Addicted and overwhelmed, failing to comply with supervision, has negative social influences", "children": [
+      {"name": "My life is that chaotic.", "children": [
+        {"name": "reconnect to family"},
+        {"name": "resolve debts"},
+        {"name": "clean"},
+        {"name": "sober"},
+        {"name": "housing"}
+      ]},
+      {"name": "I don’t even know when it was that’s how messed up I was. That’s how lost I was. Everything is a blur.", "children": [
+        {"name": "recovery"},
+        {"name": "sober"},
+        {"name": "clean"}
+      ]}
+    ]},
+
+    {"name": "Drug or alcohol addiction, with positive social support", "children": [
+      {"name": "Some people say I'm hard to get along with.", "children": [
+        {"name": "sober"}
+      ]},
+      {"name": "Some people say I'm hard to get along with.", "children": [
+        {"name": "employment"}
+      ]}
+    ]},
+
+    {"name": "Distrustful of system, overscheduled with little understanding of the process and negatice social influences", "children": [
+      {"name": "They put you in jail if you don’t do the thing, but how can you do the things if you can’t go to work?", "children": [
+        {"name": "complete probation quietly"},
+        {"name": "recovery"}
+      ]},
+      {"name": "Who is going to hire you when you are running from one of these [probation] appointments to the next? ", "children": [
+        {"name": "complete probation quietly"},
+        {"name": "justice for case"},
+        {"name": "family"}
+      ]}
+    ]}
+
+  ]},
+
+  {"name": "Consequence-focused", "children": [
+    {"name": "Younger (20s) with family support and negative social circles", "children": [
+      {"name": "I just got to stop hanging out with certain other people.", "children": [
+        {"name": "GED"},
+        {"name": "job"}
+      ]},
+      {"name": "My phone is super important to me at this time with the trial stuff.", "children": [
+        {"name": "family"},
+        {"name": "job"}
+      ]}
+    ]}
+  ]},
+
+  {"name": "Unmotivated, feels wronged", "children": [
+    {"name": "Young, defiant, flaunting rules, clever", "children": [
+      {"name": "I play Heroes of Order and Chaos and surf Facebook all day.", "children": [
+        {"name": "complete"}
+      ]},
+      {"name": "I've been clean a long time.", "children": [
+        {"name": "complete"},
+        {"name": "work"},
+        {"name": "girlfriend"}
+      ]}
+    ]},
+
+    {"name": "From California, did not know marijuana was illegal in Utah", "children": [
+      {"name": "I'm going to fight all those charges. I'm not causing no trouble.", "children": [
+        {"name": "justice for case"},
+        {"name": "acquittal"}
+      ]}
+    ]}
+  ]},
+
+  {"name": "Stable", "children": [
+    {"name": "Feel they 'messed up,' fees often a pain point", "children": [
+      {"name": "Everything just hit my family at once. This is something I just want to move past.", "children": [
+        {"name": "complete probation quietly"}
+      ]},
+      {"name": "I'll do everything in my power to make sure [my job] doesn’t know this happened.", "children": [
+        {"name": "complete probation quietly"}
+      ]}
+    ]}
+  ]}
+
+]}
