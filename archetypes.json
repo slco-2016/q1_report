@@ -1,8 +1,20 @@
 {"name": "Archetypes", "children": [
 
-  {"name": "Motivated", "children": [
+  {"name": "Motivated", 
+    "quotes": [
+      "Motivated to put supervision and the justice system behind them.",
+      "Most likely they have some positive social support from friends or family.",
+      "May have trauma in their past.",
+      "Most likely has recreational drug use in their past or are overcoming addiction.",
+      "May need to move away from negative social ties.",
+      "May have multiple convictions in their past."
+    ], "children": [
 
-    {"name": "Wants to put low level crime history behind them", "children": [
+    {"name": "Wants to put low level crime history behind them", 
+      "quotes": [
+        "If I'm not spending time with people then I am digitally connected [with them].",
+        "The phone is my preferred communication style; I feel that everything is better understood."
+      ], "children": [
       {"name": "I know how the system works this time.", "children": [
         {"name": "job"}, 
         {"name": "recovery"}
@@ -14,7 +26,12 @@
       ]}
     ]},
 
-    {"name": "Knowledgeable about system, with past trauma and recreational drug use", "children": [
+    {"name": "Knowledgeable about system, with past trauma and recreational drug use", 
+      "quotes": [
+        "Having to call in regularly for checkups is better, safer.",
+        "I use my phone for music, YouTube, phone call, job searching, emails, and texting my daughter, boyfriend, and family.",
+        "Calling in is easy, you can do it on your lunch break; you can [even] borrow a phone."
+      ], "children": [
       {"name": "[This is the] the first time in a long time I'm doing good. I’m proud of myself.", "children": [
         {"name": "recovery"}, 
         {"name": "clean"}, 
@@ -30,7 +47,11 @@
       ]}
     ]},
 
-    {"name": "Addicted to drugs or alcohol, has positive support, desire to change lifestyle", "children": [
+    {"name": "Addicted to drugs or alcohol, has positive support, desire to change lifestyle", 
+      "quotes": [
+        "Oh, wait. My phone number has changed.",
+        "It's more beneficial to just call in; what's the point of coming all the way down here?"
+      ], "children": [
       {"name": "I get into a little bit of trouble, so [I say] f*** it. That’s really the kind of attitude I get in. I’m just making it worse [and] adding to it.", "children": [
         {"name": "sober"}
       ]},
@@ -41,19 +62,35 @@
 
   ]},
 
-  {"name": "Lacks clarity and support", "children": [
+  {"name": "Lacks clarity and support", 
+    "quotes": [
+      "Most likely uses drugs recreationally.", 
+      "May have to navigate multiple cases at the same time.",
+      "Negative social influences can influence their actions.",
+      "Doesn't understand the supervision process.",
+      "May be distrustful of the justice system."
+    ], "children": [
 
-    {"name": "Needs assurances and does not understand process", "children": [
+    {"name": "Needs assurances and does not understand process", 
+      "quotes": [
+        "I use my phone for everything: tracking calories, emails, etc.",
+        "You can call me anytime."
+      ], "children": [
       {"name": "It’s so amazing how this can happen without being convicted.", "children": [
         {"name": "move"}, 
         {"name": "reconnect to family"}
       ]},
-      {"name": "I feel I suffer from PTSD and I feel like I don’t have an addiction.", "children": [
-        {"name": "employment"}
+      {"name": "I should have rethought the whole thing. Life was not over for me, [it was] not a doomed outcome.", "children": [
+        {"name": "reconnect to family"},
+        {"name": "provide for children"}
       ]}
     ]},
 
-    {"name": "Addicted and overwhelmed, failing to comply with supervision, has negative social influences", "children": [
+    {"name": "Addicted and overwhelmed, failing to comply with supervision, has negative social influences", 
+      "quotes": [
+        "Communication in a city is paramount, you can’t do anything without communication and transportation.",
+        "I don’t have my phone - I mean that’s another thing; I’m a loser."
+      ], "children": [
       {"name": "My life is that chaotic.", "children": [
         {"name": "reconnect to family"},
         {"name": "resolve debts"},
@@ -68,16 +105,11 @@
       ]}
     ]},
 
-    {"name": "Drug or alcohol addiction, with positive social support", "children": [
-      {"name": "Some people say I'm hard to get along with.", "children": [
-        {"name": "sober"}
-      ]},
-      {"name": "Some people say I'm hard to get along with.", "children": [
-        {"name": "employment"}
-      ]}
-    ]},
-
-    {"name": "Distrustful of system, overscheduled with little understanding of the process and negatice social influences", "children": [
+    {"name": "Distrustful of system, overscheduled with little understanding of the process and negatice social influences", 
+      "quotes": [
+        "Oh, wait. My phone number has changed.",
+        "It's more beneficial to just call in; what's the point of coming all the way down here?"
+      ], "children": [
       {"name": "They put you in jail if you don’t do the thing, but how can you do the things if you can’t go to work?", "children": [
         {"name": "complete probation quietly"},
         {"name": "recovery"}
@@ -91,8 +123,18 @@
 
   ]},
 
-  {"name": "Consequence-focused", "children": [
-    {"name": "Younger (20s) with family support and negative social circles", "children": [
+  {"name": "Consequence-focused", 
+    "quotes": [
+      "Has family support, and are able to remember appointments and clear on what’s expected of them.",
+      "Usually in their early 20's.",
+      "Negative social influences can influence their actions.",
+      "Afraid of failing supervision requirements."
+    ], "children": [
+    {"name": "Younger with family support and negative social circles", 
+      "quotes": [
+        "You should remember your appointment.",
+        "I called [my] uncle; he knows more about the process and was able to give more info."
+      ], "children": [
       {"name": "I just got to stop hanging out with certain other people.", "children": [
         {"name": "GED"},
         {"name": "job"}
@@ -104,8 +146,17 @@
     ]}
   ]},
 
-  {"name": "Unmotivated, feels wronged", "children": [
-    {"name": "Young, defiant, flaunting rules, clever", "children": [
+  {"name": "Unmotivated, feels wronged", 
+    "quotes": [
+      "Tend to be in their early twenties.",
+      "Fees are a pain point.",
+      "Limited follow through on appointments."
+    ], "children": [
+    {"name": "Young, defiant, flaunting rules, clever", 
+      "quotes": [
+        "[Text message notifications] would be cool. I mean, I am pretty good at it, but you never know.",
+        "I'm going to go pay the [phone] bill [to top it up] right after this meeting."
+      ], "children": [
       {"name": "I play Heroes of Order and Chaos and surf Facebook all day.", "children": [
         {"name": "complete"}
       ]},
@@ -116,7 +167,10 @@
       ]}
     ]},
 
-    {"name": "From California, did not know marijuana was illegal in Utah", "children": [
+    {"name": "From California, did not know marijuana was illegal in Utah", 
+      "quotes": [
+        "I was reminded last week for a dental appointment."
+      ], "children": [
       {"name": "I'm going to fight all those charges. I'm not causing no trouble.", "children": [
         {"name": "justice for case"},
         {"name": "acquittal"}
@@ -124,8 +178,18 @@
     ]}
   ]},
 
-  {"name": "Stable", "children": [
-    {"name": "Feel they 'messed up,' fees often a pain point", "children": [
+  {"name": "Stable", 
+    "quotes": [
+      "Typically will admit fault on their own.",
+      "Main focus in in remedying the situation and resolving all issues resulting.",
+      "Tend to have stable home lives.",
+      "Fees can be a pain point."
+    ], "children": [
+    {"name": "Feel they 'messed up,' fees often a pain point", 
+      "quotes": [
+        "I really appreciate you responding to me.",
+        "If I had questions they got answers. I just wanted to get the hell out of there."
+      ], "children": [
       {"name": "Everything just hit my family at once. This is something I just want to move past.", "children": [
         {"name": "complete probation quietly"}
       ]},

@@ -95,7 +95,7 @@
     }
 
     .base .left b, .base .right b {
-      font-size: 3em;
+      font-size: 2em;
       opacity: 0.5
     }
 
@@ -113,11 +113,11 @@
     <div class="title">Archetypes Tree Diagram</div>
     <div class="base">
       <div class="left"><div>
-        <b>Category</b>
+        <b id="title-category">Category</b>
         <p id="category">Click on categories to open subcategory user archetype branches.</p>
       </div></div>
       <div class="right"><div>
-        <b>Sub-category</b>
+        <b id="title-subcat">Sub-category</b>
         <p id="subcat">Click on subcategory to learn more about specific user cases from archetype interviews.</p>
       </div></div>
     </div>
@@ -276,8 +276,17 @@
 
     function modBaseText (source) {
       console.log(source);
-      if (source.depth == 1) $("#category").text(source.name);
-      if (source.depth == 2) $("#subcat").text(source.name);
+      if (source.depth == 1) { 
+        $("#title-category").text(source.name); 
+        $("#title-subcat").text("Sub-category"); 
+        $("#category").html(source.quotes.join("<br>")); 
+        $("#subcat").text("");
+      } else if (source.depth == 2) {
+        $("#title-category").text(source.parent.name); 
+        $("#title-subcat").text(source.name); 
+        $("#category").html(source.parent.quotes.join("<br>")); 
+        $("#subcat").html("<i>\"" + source.quotes.join("\"</i><br><i>\"") + "\"</i>"); 
+      }
     }
 
   </script>
