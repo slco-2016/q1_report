@@ -68,11 +68,59 @@
       background-color: #ff6500;
     }
 
+    .title {
+      padding-left: 15px;
+      pointer-events: none;
+      position: fixed;
+      font-size: 4em;
+      font-weight: 900;
+      opacity: 0.25
+    }
+
+    .base {
+      height: 250px;
+      position: fixed;
+      bottom: 0px;
+      width: 100%;
+    }
+
+    .base .left, .base .right {
+      width: 50%;
+      height: inherit;
+      float: left;
+    }
+
+    .base .left div, .base .right div {
+      padding: 10px 10px 10px 15px;
+    }
+
+    .base .left b, .base .right b {
+      font-size: 3em;
+      opacity: 0.5
+    }
+
+    .base .left {
+    }
+
+    .base .right {
+    }
+
   </style>
 
 
   <body>
     <a class="back-btn" href="/">Back</a>
+    <div class="title">Archetypes Tree Diagram</div>
+    <div class="base">
+      <div class="left"><div>
+        <b>Category</b>
+        <p id="category">Click on categories to open subcategory user archetype branches.</p>
+      </div></div>
+      <div class="right"><div>
+        <b>Sub-category</b>
+        <p id="subcat">Click on subcategory to learn more about specific user cases from archetype interviews.</p>
+      </div></div>
+    </div>
   </body>
 
   <script type="text/javascript">
@@ -115,6 +163,7 @@
     });
 
     function update(source) {
+      modBaseText(source);
 
       // Compute the new tree layout.
       var nodes = tree.nodes(root).reverse(),
@@ -147,7 +196,7 @@
       nodeEnter.insert("rect","text")
           .attr("width", function(d){return d.bbox.width})
           .attr("height", function(d){return d.bbox.height})
-          .attr("x", function(d) { return d.parent || d._parent ? 10 : -10; })
+          .attr("x", function(d) { console.log(d.parent); return d.parent || d._parent ? 10 : -10; })
           .attr("y", "-.35em")
           .attr("text-anchor", "start")
           .style("fill", "#2c4147");
@@ -223,6 +272,12 @@
 
     function getBB (selection) {
       selection.each(function(d){d.bbox = this.getBBox();})
+    };
+
+    function modBaseText (source) {
+      console.log(source);
+      if (source.depth == 1) $("#category").text(source.name);
+      if (source.depth == 2) $("#subcat").text(source.name);
     }
 
   </script>
