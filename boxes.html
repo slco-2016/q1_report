@@ -89,10 +89,60 @@
       background-color: #ff6500;
     }
 
+    .dropdown {
+      position: absolute;
+      top: 16px;
+      left: 10px;
+      height: 36px;
+      font-weight: 900;
+      color: rgba(255,255,255,1);
+      background-color: orange;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .dropdown span {
+      padding: 8px 14px 8px 12px;
+      line-height: 36px;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: orange;
+        padding: 0;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 100;
+    }
+
+    .dropdown-content p {
+      padding: 5px 14px 5px 12px;
+      margin: 0;
+    }
+
+    .dropdown-content p:hover {
+      background-color: #ff6500;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
   </style>
 
 
   <body>
+    <div class="dropdown">
+      <span>Archetype Filters</span>
+      <div class="dropdown-content">
+        <p onclick='prepDataThenRun(null, "All Users")'>All Users</p>
+        <p onclick='prepDataThenRun("11", "Consequence-focused")'>Consequence-focused</p>
+        <p onclick='prepDataThenRun("22", "Stable")'>Stable</p>
+        <p onclick='prepDataThenRun("345", "Motivated")'>Motivated</p>
+        <p onclick='prepDataThenRun("678", "Lacks Clarity, Support")'>Lacks Clarity, Support</p>
+        <p onclick='prepDataThenRun("910", "Unmotivated, Upset")'>Unmotivated, Upset</p>
+      </div>
+    </div>
     <div class="title">User Research <b>Study Results</b></div>
     <a class="back-btn" href="index.html">Back</a>
     <div id="chart"></div>
@@ -107,6 +157,8 @@
       width: window.innerWidth,
       height: window.innerHeight
     };
+
+    var cleanedData;
 
     window.onload = function () {
       Tabletop.init({ 
@@ -130,18 +182,61 @@
             "category": cleanName(col[0]),
             "subcat": cleanName(col[1]),
             "key": cleanName(col[2]),
-            "value": val
+            "value": val,
+            "altVals": {"all": val}
           }
           res.push(single);
         }
       }
 
-      var res = d3.nest().key(function (d) { return d.category; }).key(function(d) { return d.subcat; }).entries(res);
-      console.log(res)
-      runDraw({}, {key: "All Users", values: res});
+      for (var i = 1; i < data.length; i++) {
+        var cols = Object.keys(data[i]);
+
+        for (var c = 1; c < cols.length; c++) {
+          var col = cols[c].split("_");
+
+          for (var r = 0; r < res.length; r++) {
+            var catOK = res[r].category == cleanName(col[0]);
+            var subOK = res[r].subcat == cleanName(col[1]);
+            var keyOK = res[r].key == cleanName(col[2]);
+
+            if (catOK && subOK && keyOK) {
+              var val1 = data[i]["descriptor_1_val"];
+              var val2 = data[i]["descriptor_2_val"];
+              if (!res[r].altVals[val1]) res[r].altVals[val1] = 0;
+              if (!res[r].altVals[val2]) res[r].altVals[val2] = 0;
+              var numVal = Number(data[i][cols[c]]);
+              if (!isNaN(numVal) && numVal > 0) {
+                res[r].altVals[val1] += 1;
+                res[r].altVals[val2] += 1; 
+              }
+            }
+          }
+        }
+      }
+      cleanedData = res;
+      prepDataThenRun(null, "All Users");
+    };
+
+    function prepDataThenRun (attr, newArch) {
+      currentArchetype = newArch;
+      if (!currentArchetype) currentArchetype = "All Users";
+      if (!attr) attr = "all";
+
+      for (var r = 0; r < cleanedData.length; r++) {
+        var newVal = cleanedData[r].altVals[attr];
+        if (isNaN(newVal)) newVal = 0;
+        cleanedData[r].value = newVal;
+      }
+      console.log(JSON.stringify(cleanedData[1].value), JSON.stringify(cleanedData[2].value), JSON.stringify(cleanedData[3].value), JSON.stringify(cleanedData[4].value), JSON.stringify(cleanedData[5].value))
+
+      var res = d3.nest().key(function (d) { return d.category; }).key(function(d) { return d.subcat; }).entries(cleanedData);
+      runDraw({}, {key: currentArchetype, values: res});
     };
 
     function runDraw (o, data) {
+      try { d3.select("svg").remove(); } catch (e) { console.log("trouble removing the svg on redraw")}
+
       var root,
           opts = $.extend(true, {}, defaults, o),
           formatNumber = d3.format(opts.format),
@@ -240,6 +335,7 @@
             .datum(d.parent)
             .on("click", transition)
           .select("text")
+            .attr("x", 200)
             .text(name(d));
 
         var g1 = svg.insert("g", ".grandparent")
@@ -263,6 +359,7 @@
             .call(rect)
           .append("title")
             .text(function(d) { return d.key + " (" + formatNumber(d.value) + ")"; });
+
         children.append("text")
             .attr("class", "ctext")
             .text(function(d) { return d.key; })
