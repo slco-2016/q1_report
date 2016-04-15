@@ -161,11 +161,12 @@
     var cleanedData;
 
     window.onload = function () {
-      Tabletop.init({ 
-        key: '1lwRdH1d-k1HkV0P9VH4HfOlKtdLj5ygccfakre-__Eo',
-        callback: function (data, tabletop) { configure(data); },
-        simpleSheet: true 
-      });
+      // Tabletop.init({ 
+      //   key: 'X1lwRdH1d-k1HkV0P9VH4HfOlKtdLj5ygccfakre-__Eo',
+      //   callback: function (data, tabletop) { configure(data); },
+      //   simpleSheet: true 
+      // });
+      $.getJSON("ss-snapshot.js", function (d) { configure(d); });
     };
 
     function configure (data) {
