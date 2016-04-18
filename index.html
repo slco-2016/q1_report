@@ -22,12 +22,35 @@
       padding: 0px;
       overflow-x: hidden;
       background-color: #FFF;
-      color: #FFF;
+      color: #4BAEFF;
     }
 
     a, a:hover, a:visited, a:active {
       text-decoration: none;
       color: #FFF;
+    }
+
+    header  {
+      font-weight: 700;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    header div {
+      float: right;
+      margin-left: 20px;
+      padding: 3px 10px 3px 10px;
+      cursor: pointer;
+    }
+
+    header div.inverse {
+      background-color: #4BAEFF;
+      color: #FFF;
+    }
+
+    header div.inverse:hover {
+      background-color: orange;
     }
 
     .title {
@@ -57,6 +80,17 @@
       margin-left: auto;
       margin-right: auto;
       cursor: pointer;
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .blocks .fa { 
+      font-size: 25px;
+      padding-right: 10px;
+    }
+
+    .blocks .fa, .blocks .header {
+      line-height: 50px;
     }
 
     .block {
@@ -76,6 +110,10 @@
       background-color: #004b6a;
     }
 
+    .block .opt:hover {
+      background-color: orange;
+    }
+
     .block .opt:not(:first-child) {
       margin-top: 3px;
     }
@@ -84,6 +122,18 @@
 
 
   <body>
+
+    <header>
+      <div class="inverse">
+        View Full Report
+      </div>
+      <div>
+        Tweet
+      </div>
+      <div>
+        Contact Us
+      </div>
+    </header>
 
     <div class="title">
       <div class="t-content">
@@ -99,7 +149,7 @@
     <div class="blocks">
       <div class="block">
         <div class="header" onclick="toggle(this)">
-          <i class="fa fa-info-circle"></i>
+          <i class="fa fa-info"></i>
           About
         </div>
         <div class="opt">
@@ -121,13 +171,7 @@
           Where
         </div>
         <div class="opt">
-          Meep
-        </div>
-        <div class="opt">
-          Meep
-        </div>
-        <div class="opt">
-          Meep
+          <a href="map.html">View all user research sites</a>
         </div>
       </div>
     </div>
@@ -192,48 +236,6 @@
         if ($(this).css("display") == "none") $(this).slideDown(); 
       });
     };
-
-    function drawMap () {
-      var layer = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',{attribution: ""});
-      map = L.map("map", {
-        scrollWheelZoom: false,
-        center: [40.6708, -111.8910],
-        zoom: 11
-      });
-
-      map.addLayer(layer);
-
-      [
-        {latlng: [40.777338, -111.888040], name: "Maps on the Hill"},
-        {latlng: [40.759576, -111.887005], name: "David Litvack"},
-        {latlng: [40.759639, -111.889491], name: "CourtHack"},
-        {latlng: [40.764097, -111.903263], name: "Homeless Court"},
-        {latlng: [40.763339, -111.904101], name: "Homeless User Interviews"},
-        {latlng: [40.764428, -111.904680], name: "Road Home"},
-        {latlng: [40.759168, -111.881585], name: "Salt Lake City Police Department"},
-        {latlng: [40.760896, -111.882776], name: "HackNight SLC"},
-        {latlng: [40.759486, -111.886587], name: "OpenSLC"},
-        {latlng: [40.698867, -111.916213], name: "Sheriff Winder and Deputy Chief Lofgreen"},
-        {latlng: [40.696710, -111.914882], name: "County Metro Jail <br> Observed intake, processing, and release"},
-        {latlng: [40.726604, -111.887450], name: "Salt Lake County Information Systems"},
-        {latlng: [40.726277, -111.887446], name: "Mayor Ben McAdams"},
-        {latlng: [40.727944, -111.887714], name: "Salt Lake County Registrar"},
-        {latlng: [40.728502, -111.875545], name: "Code for America Team Salt Lake County"},
-        {latlng: [40.485133, -111.895048], name: "Adult Parole and Probation <br> Leadership Introduction and Brainstorming Session"},
-        {latlng: [40.570915, -111.895366], name: "Sandy Police Department"},
-        {latlng: [40.570475, -111.896085], name: "LEADS Meeting"},
-        {latlng: [40.760865, -111.902913], name: "Homeless Outreach"},
-        {latlng: [40.758516, -111.889169], name: "Veterans Court"},
-        {latlng: [40.764253, -111.891304], name: "Goldman Sachs"},
-        {latlng: [40.759294, -111.884079], name: "Homeless Outreach"},
-        {latlng: [40.741875, -111.885861], name: "Criminal Justice Services <br> Pretrial and probation supervision appointments"},
-        {latlng: [40.741947, -111.886406], name: "TASC, Inc <br> Urine Analysis"},
-        {latlng: [40.759760, -111.888593], name: "Third District Court <br> Procedural observations"}
-
-      ].forEach(function (ea) {console.log(ea.name);
-        L.marker(ea.latlng).addTo(map).bindPopup(ea.name);
-      });
-    }
 
   </script>
 
