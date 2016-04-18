@@ -21,7 +21,7 @@
       margin: 0px;
       padding: 0px;
       overflow-x: hidden;
-      background-color: #004b6a;
+      background-color: #FFF;
       color: #FFF;
     }
 
@@ -30,120 +30,54 @@
       color: #FFF;
     }
 
-    .fa {
-      padding-top: 15px;
-      padding-bottom: 5px;
-      font-size: 2.25em;
-    }
-
     .title {
-      top: 25px;
-      right: 25px;
-      position: absolute;
-    }
-
-    .title .big, .title .sub {
-      display: block;
-      clear: both;
-      background-color: #7ab5d6;
-      padding: 5px 10px 5px 10px;
-      margin-bottom: 10px;
-      float: right;
-    }
-
-    .title .big a, .title .sub a {
-      color: #004b6a;
-    }
-
-    .title .big {
-      font-size: 2em;
-      font-weight: 900;
-    }
-
-    .menu-box {
-      margin: 0 auto;
-      margin-top: 10%;
-      background-color: #7ab5d6;
-      width: 435px;
-    }
-
-    .hex {
-      position: absolute;
-    }
-
-    .hexagon {
-      width: 144px;
-      height: 130px;
-      background: #7ab5d6;
-      position: relative;
-      text-align: center;
-      font-weight: 900;
-      text-shadow: 0px 0px 20px rgba(51,0,0,0.75);
-      cursor: pointer;
-      box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-      border-left: 15px solid rgba(0,0,0,0.5);
-    }
-
-    .hexagon i {
-      padding-top: 30px;
-    }
-
-    .hexagon:hover {
-      transition: all .2s ease-in-out;
-      transform: scale(0.9);
-    }
-
-    .hexagon.one { background: #ffd000; }
-    .hexagon.one:before { border-bottom: 40px solid #ffd000; }
-    .hexagon.one:after { border-top: 40px solid #ffd000; }
-
-    .hexagon.one-alt { background: #d2ab00; }
-    .hexagon.one-alt:before { border-bottom: 40px solid #d2ab00; }
-    .hexagon.one-alt:after { border-top: 40px solid #d2ab00; }
-
-    .hexagon.two { background: #ffba00; }
-    .hexagon.two:before { border-bottom: 40px solid #ffba00; }
-    .hexagon.two:after { border-top: 40px solid #ffba00; }
-
-    .hexagon.two-alt { background: ##e6a700; }
-    .hexagon.two-alt:before { border-bottom: 40px solid ##e6a700; }
-    .hexagon.two-alt:after { border-top: 40px solid ##e6a700; }
-
-    .hexagon.three { background: #ff9000; }
-    .hexagon.three:before { border-bottom: 40px solid #ff9000; }
-    .hexagon.three:after { border-top: 40px solid #ff9000; }
-
-    .hexagon.four { background: #ff6500; }
-    .hexagon.four:before { border-bottom: 40px solid #ff6500; }
-    .hexagon.four:after { border-top: 40px solid #ff6500; }
-
-    .hexagon.four-alt { background: #cc5000; }
-    .hexagon.four-alt:before { border-bottom: 40px solid #cc5000; }
-    .hexagon.four-alt:after { border-top: 40px solid #cc5000; }
-
-    .map {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      margin-top: -250px;
-      margin-left: -350px;
-      border-radius: 5px;
-      width: 700px;
-      height: 500px;
-      padding: 10px;
-      z-index: 120;
-      background-color: #060d0f;
-    }
-
-    #map {
-      height: 100%;
       width: 100%;
+      text-align: center;
+      margin-top: 10%;
+      color: #4BAEFF;
     }
 
-    .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    .title .t-content {
+      text-align: left;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 3.2em;
+    }
+
+    .title .t-content .big {
+      font-size: 2.8em;
+      font-weight: 900;
+      line-height: 0.75em;
+    }
+
+    .blocks {
+      margin-top: 30px;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      cursor: pointer;
+    }
+
+    .block {
+      background-color: #4BAEFF;
+      width: 23%;
+      line-height: 2.5em;
+      padding: 3px;
+      float: left;
+      margin-left: 1%;
+    }
+
+    .block .opt, .block .header {
+      padding: 0px 10px 0px 10px;
+    }
+
+    .block .opt {
       background-color: #004b6a;
+    }
+
+    .block .opt:not(:first-child) {
+      margin-top: 3px;
     }
 
   </style>
@@ -151,81 +85,88 @@
 
   <body>
 
-    <div class="menu-box">
-
-      <!-- ABOUT SEC -->
-      <div class="hex"><div class="hexagon one-alt" id="abouthex0" onclick="toggleAboutHex()" style="left: 0px; z-index: 100">
-        <i class="fa fa-info-circle"></i><br>
-        About
-      </div></div>
-
-      <div class="hex"><div class="hexagon one" id="abouthex1" style="left: -75px; top: 135px">
-        <i class="fa fa-exclamation-triangle"></i><br>
-        Challenge
-      </div></div>
-
-      <div class="hex" onclick="mapModalToggle()" id="abouthex2"><div class="hexagon one" style="left: -150px;">
-        <i class="fa fa-map"></i><br>
-        Where
-      </div></div>
-
-      <!-- METHOD SEC -->
-      <div class="hex"><div class="hexagon two-alt" id="methodhex0" onclick="toggleMethodHex()" style="left: 75px; top: 135px">
-        <i class="fa fa-search"></i><br>
-        Methodology
-      </div></div>
-
-      <div class="hex"><div class="hexagon two" id="methodhex1" style="left: 0px; top: 270px">
-        <i class="fa fa-user"></i><br>
-        User-Centered
-      </div></div>
-
-      <!-- OUTCOMES SEC -->
-      <div class="hex"><div class="hexagon three" style="left: 225px; top: 135px">
-        <i class="fa fa-book"></i><br>
-        Results Guide
-      </div></div>
-
-      <!-- DATA SEC -->
-      <div class="hex"><div class="hexagon four-alt" id="datahex0" onclick="toggleDataHex()" style="left: 300px; top: 270px">
-        <i class="fa fa-database"></i><br>
-        Explore Data
-      </div></div>
-
-      <div class="hex" id="datahex1">
-        <a href="tree.html">
-          <div class="hexagon four" style="left: 375px; top: 405px;">
-            <i class="fa fa-pagelines"></i><br>
-            Tree Diagram
-          </div>
-        </a>
-      </div>
-
-      <div class="hex" id="datahex2">
-        <a href="boxes.html">
-          <div class="hexagon four" style="left: 450px; top: 270px;">
-            <i class="fa fa-th"></i><br>
-            Box Diagram
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <div class="map" style="display:none;">
-      <span onclick="mapModalToggle()" style="right:25px;position:absolute;z-index:99999">
-        <i class="fa fa-times-circle" style="color:#004b6a;text-shadow:0px 0px 6px rgba(0,0,0,0.4); cursor:pointer"></i>
-      </span>
-      <div id="map"></div>
-    </div>
-
     <div class="title">
-      <div class="big"><a href="/">Phase 1 Research Review</a></div>
-       <div class="sub"><a href="http://c4a-slc.tumblr.com/">
-        Code for America: 2016 Team Salt Lake
-      </a></div>
+      <div class="t-content">
+        <div class="top">
+          Salt Lake County & Code for America, 2016
+        </div>
+        <div class="big">
+          Research Review
+        </div>
+      </div>
     </div>
 
-    <div style="display:none"></div>
+    <div class="blocks">
+      <div class="block">
+        <div class="header" onclick="toggle(this)">
+          <i class="fa fa-info-circle"></i>
+          About
+        </div>
+        <div class="opt">
+          Meep
+        </div>
+        <div class="opt">
+          Meep
+        </div>
+        <div class="opt">
+          Meep
+        </div>
+      </div>
+    </div>
+
+    <div class="blocks">
+      <div class="block">
+        <div class="header" onclick="toggle(this)">
+          <i class="fa fa-map"></i>
+          Where
+        </div>
+        <div class="opt">
+          Meep
+        </div>
+        <div class="opt">
+          Meep
+        </div>
+        <div class="opt">
+          Meep
+        </div>
+      </div>
+    </div>
+
+    <div class="blocks">
+      <div class="block">
+        <div class="header" onclick="toggle(this)">
+          <i class="fa fa-search"></i>
+          Methodology
+        </div>
+        <div class="opt">
+          Meep
+        </div>
+        <div class="opt">
+          Meep
+        </div>
+        <div class="opt">
+          Meep
+        </div>
+      </div>
+    </div>
+
+    <div class="blocks">
+      <div class="block">
+        <div class="header" onclick="toggle(this)">
+          <i class="fa fa-database"></i>
+          Explore Data
+        </div>
+        <div class="opt">
+          Meep
+        </div>
+        <div class="opt">
+          Meep
+        </div>
+        <div class="opt">
+          Meep
+        </div>
+      </div>
+    </div>
 
   </body>
 
@@ -233,51 +174,23 @@
     window.onload = function () {
       var dy = Math.round((window.innerHeight - 450)/2);
       if (dy > 0) $(".menu-box").css("margin-top", dy + "px");
-      toggleDataHex();
-      toggleAboutHex();
-      toggleMethodHex();
+
+      var index = 0;
+      $(".opt").each(function () { 
+        index += 1;
+        var time = index * 100;
+        var that = this;
+        setTimeout(function () {$(that).slideToggle(); }, time); 
+      });
     };
 
-    var map;
-
-    function mapModalToggle () {
-      $(".map").toggle("fade", function () { if (!map) drawMap(); });
-    };
-
-    function toggleDataHex () { 
-      var classFour = $("#datahex0").hasClass("four");
-      if (classFour) {
-        $("#datahex0").addClass("four-alt");
-        $("#datahex0").removeClass("four");
-      } else {
-        $("#datahex0").addClass("four");
-        $("#datahex0").removeClass("four-alt");
-      }
-      $("#datahex1").fadeToggle(function () { $("#datahex2").fadeToggle(); });
-    };
-
-    function toggleAboutHex () { 
-      var classOne = $("#abouthex0").hasClass("one");
-      if (classOne) {
-        $("#abouthex0").addClass("one-alt");
-        $("#abouthex0").removeClass("one");
-      } else {
-        $("#abouthex0").addClass("one");
-        $("#abouthex0").removeClass("one-alt");
-      }
-      $("#abouthex1").fadeToggle(function () { $("#abouthex2").fadeToggle(); });
-    };
-
-    function toggleMethodHex () { 
-      var classTwo = $("#methodhex0").hasClass("two");
-      if (classTwo) {
-        $("#methodhex0").addClass("two-alt");
-        $("#methodhex0").removeClass("two");
-      } else {
-        $("#methodhex0").addClass("two");
-        $("#methodhex0").removeClass("two-alt");
-      }
-      $("#methodhex1").fadeToggle(function () {  });
+    function toggle (parent) {
+      $(".opt").each(function () {
+        if ($(this).css("display") !== "none") $(this).slideUp(); 
+      });
+      $(parent).parent().children(".opt").each(function () {
+        if ($(this).css("display") == "none") $(this).slideDown(); 
+      });
     };
 
     function drawMap () {
