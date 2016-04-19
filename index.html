@@ -148,7 +148,7 @@
 
     <div class="blocks">
       <div class="block">
-        <div class="header" onclick="toggle(this)">
+        <div class="header">
           <i class="fa fa-info"></i>
           About
         </div>
@@ -162,11 +162,9 @@
           Meep
         </div>
       </div>
-    </div>
 
-    <div class="blocks">
       <div class="block">
-        <div class="header" onclick="toggle(this)">
+        <div class="header">
           <i class="fa fa-map"></i>
           Where
         </div>
@@ -174,11 +172,9 @@
           <a href="map.html">View all user research sites</a>
         </div>
       </div>
-    </div>
 
-    <div class="blocks">
       <div class="block">
-        <div class="header" onclick="toggle(this)">
+        <div class="header">
           <i class="fa fa-search"></i>
           Methodology
         </div>
@@ -192,11 +188,9 @@
           Meep
         </div>
       </div>
-    </div>
 
-    <div class="blocks">
       <div class="block">
-        <div class="header" onclick="toggle(this)">
+        <div class="header">
           <i class="fa fa-database"></i>
           Explore Data
         </div>
@@ -228,14 +222,16 @@
       });
     };
 
-    function toggle (parent) {
+    $(".block").mouseenter(function () {
       $(".opt").each(function () {
         if ($(this).css("display") !== "none") $(this).slideUp(); 
       });
-      $(parent).parent().children(".opt").each(function () {
+      $(this).children(".opt").each(function () {
         if ($(this).css("display") == "none") $(this).slideDown(); 
       });
-    };
+    });
+
+
 
   </script>
 
