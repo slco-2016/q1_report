@@ -40,7 +40,7 @@
     header div {
       float: right;
       margin-left: 20px;
-      padding: 3px 10px 3px 10px;
+      padding: 10px 13px 10px 13px;
       cursor: pointer;
     }
 
@@ -51,6 +51,10 @@
 
     header div.inverse:hover {
       background-color: orange;
+    }
+
+    header a, header a:hover, header a:visited, header a:active {
+      color: #4BAEFF;
     }
 
     .title {
@@ -120,7 +124,6 @@
 
   </style>
 
-
   <body>
 
     <header>
@@ -128,7 +131,7 @@
         View Full Report
       </div>
       <div>
-        Tweet
+        <a href="https://twitter.com/intent/tweet?button_hashtag=cfa-saltlake">Tweet</a>
       </div>
       <div>
         Contact Us
@@ -210,8 +213,6 @@
 
   <script type="text/javascript">
     window.onload = function () {
-      var dy = Math.round((window.innerHeight - 450)/2);
-      if (dy > 0) $(".menu-box").css("margin-top", dy + "px");
 
       var index = 0;
       $(".opt").each(function () { 
