@@ -39,22 +39,28 @@ header .content .title:hover {
   color: #FFF;
 }
 
-header .content .right-opts {
+header .survey {
+  background-color: #004b6a;
   color: #FFF;
+  float: right;
   font-weight: 700;
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
+  padding: 5px 15px 10px 15px;
+  cursor: pointer;
 }
 
-header .content .right-opts .opt {
+.right-opts {
+  color: #4BAEFF;
+  font-weight: 700;
+  float: right;
+}
+
+.right-opts .opt {
   float: right;
   padding: 10px 12px 10px 12px;
 }
 
-header .content .right-opts .opt.inverse {
-  background-color: #FFF;
-  color: #4BAEFF;
+.right-opts .opt.inverse {
+  color: #004b6a;
 }
 
 .back {
@@ -68,6 +74,7 @@ header .content .right-opts .opt.inverse {
 }
 
 .header {
+  padding-top: 25px;
   color: #4BAEFF;
   font-size: 3em;
   font-weight: 700;
@@ -106,13 +113,20 @@ header .content .right-opts .opt.inverse {
 .main .right {
   float: left;
   width: 300px;
-  padding: 10px;
-  padding-right: 0px;
-  padding-left: 0px;
+  margin-top: 10px;
+  padding: 0px 0px 0px 0px;
+  color: #FFF;
+  background-color: #4BAEFF;
 }
 
 .right img {
   width: 100%;
+}
+
+.right h1, .right h2, .right h3, .right h4, .right p {
+  color: #FFF;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 .grey {
