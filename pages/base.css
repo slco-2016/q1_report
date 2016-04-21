@@ -35,6 +35,10 @@ header .content .title {
   font-size: 1.25em;
 }
 
+header .content .title:hover {
+  color: #FFF;
+}
+
 header .content .right-opts {
   color: #FFF;
   font-weight: 700;
