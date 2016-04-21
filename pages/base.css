@@ -69,6 +69,20 @@ header .content .right-opts .opt.inverse {
   font-weight: 700;
 }
 
+.header .opt {
+  font-size: 0.35em;
+  padding: 10px 17px 10px 17px;
+  vertical-align: middle;
+  border-radius: 50%;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.header .opt.selected {
+  background-color: #4BAEFF;
+  color: #FFF;
+}
+
 .main {
   margin-top: 35px;
 }
