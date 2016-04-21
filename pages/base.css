@@ -102,6 +102,10 @@ header .survey {
   color: #4BAEFF;
 }
 
+.main img {
+  width: 100%;
+}
+
 .main .left {
   float: left;
   width: 560px;
