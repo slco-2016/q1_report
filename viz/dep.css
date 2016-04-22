@@ -64,9 +64,9 @@
       right: 10px;
       width: 76px;
       padding: 8px 0px 8px 0px;
-      font-weight: 900;
+      font-weight: 500;
       color: rgba(255,255,255,1);
-      background-color: #7ab5d6;
+      background-color: orange;
       text-align: center;
       cursor: pointer;
       text-decoration: none;
@@ -81,7 +81,7 @@
       top: 54px;
       left: 10px;
       height: 36px;
-      font-weight: 900;
+      font-weight: 500;
       color: rgba(255,255,255,1);
       background-color: #7ab5d6;
       cursor: pointer;
