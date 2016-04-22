@@ -194,9 +194,9 @@
 
       if (n == "attitude") { return "Attitudes"; }
       if (n == "familyfriends") { return "Family, Friends"; }
-      if (n == "status") { return "Status"; }
-      if (n == "cjs") { return "CJS Relationship"; }
-      if (n == "personal") { return "Personal"; }
+      if (n == "status") { return "Life Status"; }
+      if (n == "cjs") { return "Criminal Justice Services Relationship"; }
+      if (n == "personal") { return "Health and Personal Issues"; }
       if (n == "demographics") { return "Demographics"; }
       if (n == "technology") { return "Technology"; }
       if (n == "schedule") { return "Scheduling"; }
@@ -235,15 +235,18 @@
       if (n == "multiplecases") { return "Multiple Concurrent Cases"; }
       if (n == "multipletimesthroughsystem") { return "Multiple Times Through System"; }
       if (n == "recdrugsalcohol") { return "Recreational Drug or Alcohol Use"; }
-      if (n == "dcfs") { return "DCFS"; }
+      if (n == "dcfs") { return "Has 2nd Case Manager with DCFS"; }
       if (n == "childsupport") { return "Child Support"; }
-      if (n == "infostercare") { return "In Foster Care"; }
+      if (n == "infostercare") { return "Has Child in Foster Care"; }
       if (n == "haschildren") { return "Has Children"; }
       if (n == "livingsituation") { return "Living Situation"; }
       if (n == "withfamily") { return "Lives with Family"; }
       if (n == "hasconflicts") { return "Has Conflicts"; }
       if (n == "overscheduled") { return "Over Scheduled"; }
       if (n == "competingsupervisionreqs") { return "Competing Supervision Requirements"; }
+      if (n == "quietcompletion") { return "Quiet Supervision Completion"; }
+      if (n == "socialties") { return "Social Ties"; }
+      if (n == "family") { return "Reunite with Family"; }
 
       else { 
         n = n[0].toUpperCase() + n.slice(1, n.length)
