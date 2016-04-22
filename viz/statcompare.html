@@ -4,124 +4,250 @@
     <title>CFA: Team Salt Lake Q1 Report</title>
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900,300" rel="stylesheet" type='text/css'>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.4.3/tabletop.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-    <script src="//d3js.org/d3.v3.js"></script>
+    <link href="dep.css" rel="stylesheet" type='text/css'>
+    <script src="dep.js"></script>
 
   </head>
 
-  <style>
-    body {
-      font-family: 'Source Sans Pro', sans-serif;
-      margin: 0px;
-      padding: 0px;
-      overflow: hidden;
-      background-color:  #004b6a;
-      color: #FFF;
+  <style type="text/css">
+    svg {
+      margin-top: 75px;
     }
-
-    .title {
-      font-size: 24px;
-      text-align: center;
-      padding-top: 12px;
-      opacity: 1;
-      letter-spacing: 1px;
-    }
-
-    .back-btn {
-      position: absolute;
-      top: 16px;
-      right: 10px;
-      width: 76px;
-      padding: 8px 0px 8px 0px;
-      font-weight: 900;
-      color: rgba(255,255,255,1);
-      background-color: orange;
-      text-align: center;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .back-btn:hover {
-      background-color: #3d5a6b;
-    }
-
     .dropdown {
-      position: absolute;
-      top: 16px;
-      left: 10px;
-      height: 36px;
-      font-weight: 900;
-      color: rgba(255,255,255,1);
-      background-color: orange;
-      cursor: pointer;
-      text-decoration: none;
+      float: left;
+      min-width: 150px;
     }
-
-    .dropdown span {
-      padding: 8px 14px 8px 12px;
-      line-height: 36px;
-    }
-
     .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: orange;
-        padding: 0;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 100;
+      min-width: 150px; 
     }
-
-    .dropdown-content p {
-      padding: 5px 14px 5px 12px;
-      margin: 0;
-    }
-
-    .dropdown-content p:hover {
-      background-color: #3d5a6b;
-    }
-
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
-
-    .chart div {
-      font: 10px sans-serif;
-      background-color: steelblue;
-      text-align: right;
-      padding: 3px;
-      margin: 1px;
-      color: white;
-    }
-
   </style>
 
-
   <body>
+
     <div class="dropdown">
-      <span>Archetype Filters</span>
-      <div class="dropdown-content">
-        <p onclick='prepDataThenRun(null, "All Users")'>All Users</p>
-        <p onclick='prepDataThenRun("11", "Consequence-focused")'>Consequence-focused</p>
-        <p onclick='prepDataThenRun("22", "Stable")'>Stable</p>
-        <p onclick='prepDataThenRun("345", "Motivated")'>Motivated</p>
-        <p onclick='prepDataThenRun("678", "Lacks Clarity, Support")'>Lacks Clarity, Support</p>
-        <p onclick='prepDataThenRun("910", "Unmotivated, Upset")'>Unmotivated, Upset</p>
+      <span id="arch-name">Archetype Filters</span>
+      <div class="dropdown-content" id="arch-dd">
       </div>
     </div>
-    <div class="title">User Research <b>Study Results</b></div>
-    <a class="back-btn" href="index.html">Back</a>
+
+    <div class="dropdown" style="left: 175px">
+      <span id="sub-name">Archetype Filters</span>
+      <div class="dropdown-content" id="sub-dd">
+      </div>
+    </div>
+
+    <div class="title">User Research <b>Attribute Distributions</b></div>
+    <a class="back-btn" href="../index.html">Back</a>
     <div id="chart"></div>
   </body>
 
   <script type="text/javascript">
-    d3.select(".chart")
-      .selectAll("div")
-        .data([1,3,4,6,7,3,256,3])
-      .enter().append("div")
-        .style("width", function(d) { return d * 10 + "px"; })
-        .text(function(d) { return d; });
+    // globals
+    var margin, width, height, x, y, svg;
+    var baseData = null;
+    var opts = {};
+    
+
+    $.getJSON("ss-snapshot.js", function (d) { loadData(d); });
+    setUpView();
+
+    function loadData (d) {
+      baseData = d;
+      Object.keys(d[0]).forEach(function (ea) {
+        ea = ea.split("_");
+        if (!opts[ea[0]]) {
+          opts[ea[0]] = []; 
+          $("#arch-dd").append("<p onclick='generateData(\"" + String(ea[0]) + "\", null)'>" + cleanName(String(ea[0])) + "</p>");
+        }
+        if (opts[ea[0]].indexOf(ea[1]) == -1) opts[ea[0]].push(ea[1]);
+      });
+      console.log(opts);
+      generateData("schedule", "conflicts");
+    }
+
+    function generateData (arch, sub) {
+      $("#arch-name").text(cleanName(arch));
+      if (sub) $("#sub-name").text(cleanName(sub));
+      else $("#sub-name").text("Seelct a Sub-parameter");
+      $("#sub-dd").empty();
+
+      var newSubOpts = [];
+      var newData = {};
+      baseData.map(function (ea) {
+        var keys = Object.keys(ea);
+        keys = keys.filter(function (k) {
+          var ok = false;
+          k = k.split("_");
+          if (k[0] == arch) {
+            if (newSubOpts.indexOf(k[1]) == -1) {
+              newSubOpts.push(k[1]);
+              $("#sub-dd").append("<p onclick='generateData(\"" + String(k[0]) + "\", \"" + String(k[1]) + "\")'>" + cleanName(String(k[1])) + "</p>");
+            }
+
+            if (sub) { if (k[1] == sub) ok = true; }
+            else { ok = true; }
+          }
+          return ok;
+        });
+        keys.forEach(function (k) {
+          k2 = k.split("_")[2];
+          if (!newData[k2]) newData[k2] = 0;
+          if (!isNaN(Number(ea[k]))) newData[k2] += Number(ea[k]);
+        });
+      });
+
+      var reconfigured = [];
+      for (var v in newData) {
+        if (newData[v] > 0) {
+          reconfigured.push({
+            xval: v,
+            yval: newData[v]
+          })
+        }
+      };
+      draw(reconfigured);
+      console.log(reconfigured);
+
+      
+
+    }
+
+    function setUpView () {
+      margin = {top: 20, right: 20, bottom: 70, left: 40};
+      width = window.innerWidth - margin.left - margin.right;
+      height = window.innerHeight - 125 - margin.top - margin.bottom;
+      x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+      y = d3.scale.linear().range([height, 0]);
+
+      xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom");
+
+      yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left")
+        .ticks(10);
+
+      svg = d3.select("body").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", 
+              "translate(" + margin.left + "," + margin.top + ")");
+    };
+
+    function draw (data) {
+      // clear any existing if exist
+      try { $("svg").remove(); setUpView(); } catch (e) { };
+
+      var tot = 0;
+      data.forEach(function (d) { tot += d.yval });
+      if (tot < 23) tot = 23;
+
+      data.forEach(function (d) {
+        d.xval = cleanName(d.xval);
+        d.yval = Math.round(d.yval/tot * 100);;
+      });
+    
+      x.domain(data.map(function (d) { return d.xval; }));
+      y.domain([0, 100]);
+
+      svg.append("g")
+        .attr("class", "x axis")
+        .attr("fill", "white")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+      .selectAll("text")
+        .style("text-anchor", "middle")
+        .attr("fill", "white")
+        .attr("dy", "1em");
+
+      svg.append("g")
+        .attr("class", "y axis")
+        .attr("fill", "white")
+        .call(yAxis)
+      .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Percentage (%)");
+
+      svg.selectAll("bar")
+        .data(data)
+      .enter().append("rect")
+        .style("fill", "#7ab5d6")
+        .on("mouseover", function (d) { d3.select(this).style("fill", "orange"); })
+        .on("mouseout", function (d) { d3.select(this).style("fill", "#7ab5d6"); })
+        .attr("x", function(d) { return x(d.xval); })
+        .attr("width", x.rangeBand())
+        .attr("y", function(d) { return y(d.yval); })
+        .attr("height", function(d) { return height - y(d.yval); });
+
+    };
+
+    function cleanName (n) {
+      n = String(n);
+
+      if (n == "attitude") { return "Attitudes"; }
+      if (n == "familyfriends") { return "Family, Friends"; }
+      if (n == "status") { return "Status"; }
+      if (n == "cjs") { return "CJS Relationship"; }
+      if (n == "personal") { return "Personal"; }
+      if (n == "demographics") { return "Demographics"; }
+      if (n == "technology") { return "Technology"; }
+      if (n == "schedule") { return "Scheduling"; }
+      if (n == "users") { return "Meta"; }
+      if (n == "fta") { return "Failure-To-Appears"; }
+
+      if (n == "female") { return "Female"; }
+      if (n == "male") { return "Male"; }
+
+      if (n == "probation") { return "Probation"; }
+      if (n == "pretrial") { return "Pretrial"; }
+
+      if (n == "fearful") { return "Fearful"; }
+      if (n == "respectful") { return "Respectful"; }
+      if (n == "resigned") { return "Resigned"; }
+      if (n == "indifferent") { return "Indifferent"; }
+      if (n == "optimistic") { return "Optimistic"; }
+      if (n == "blamessys") { return "Blames the System"; }
+      if (n == "angry") { return "Angry"; }
+      if (n == "understandsreqs") { return "Understands Requirements"; }
+      if (n == "confused") { return "Confused"; }
+      if (n == "overwhelmed") { return "Overwhelmed"; }
+      if (n == "neveragain") { return "Used Phrase 'Never Again'"; }
+
+      if (n == "calculatedintent") { return "Calculated Intent"; }
+      if (n == "drugsalcohol") { return "Drugs and Alcohol"; }
+      if (n == "mentalissues") { return "Mental Issues"; }
+      if (n == "physicalissues") { return "Physical Issues"; }
+      if (n == "pasttrauma") { return "Past Trauma"; }
+      if (n == "sobercleanrecovery") { return "Sober Clean Recovery"; }
+      if (n == "ownssmartphone") { return "Owns a Smartphone"; }
+      if (n == "ios") { return "iOS"; }
+      if (n == "savvy") { return "Considered 'Tech Savvy'"; }
+      if (n == "feepayment") { return "Fee Payment"; }
+      if (n == "pastanklemonitor") { return "Has or Does Have Ankle Monitor"; }
+      if (n == "multiplecases") { return "Multiple Concurrent Cases"; }
+      if (n == "multipletimesthroughsystem") { return "Multiple Times Through System"; }
+      if (n == "recdrugsalcohol") { return "Recreational Drug or Alcohol Use"; }
+      if (n == "dcfs") { return "DCFS"; }
+      if (n == "childsupport") { return "Child Support"; }
+      if (n == "infostercare") { return "In Foster Care"; }
+      if (n == "haschildren") { return "Has Children"; }
+      if (n == "livingsituation") { return "Living Situation"; }
+      if (n == "withfamily") { return "Lives with Family"; }
+      if (n == "hasconflicts") { return "Has Conflicts"; }
+      if (n == "overscheduled") { return "Over Scheduled"; }
+      if (n == "competingsupervisionreqs") { return "Competing Supervision Requirements"; }
+
+      else { 
+        n = n[0].toUpperCase() + n.slice(1, n.length)
+        return n; 
+      }
+    };
+
   </script>
 
 </html>
