@@ -43,15 +43,15 @@
     }
 
     .children rect.parent {
-      fill-opacity: .75;
+      fill-opacity: .5;
     }
 
     .children rect.child {
-      fill-opacity: .1; 
+      fill-opacity: 1; 
     }
 
     .children:hover rect.child {
-      fill-opacity: 1; 
+      fill-opacity: .5; 
     }
 
     .children:hover text {
