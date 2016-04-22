@@ -234,10 +234,17 @@
 
     $(".block").mouseenter(function () {
       $(".opt").each(function () {
-        if ($(this).css("display") !== "none") $(this).slideUp(); 
+        if ($(this).css("display") !== "none") $(this).hide(); 
       });
       $(this).children(".opt").each(function () {
-        if ($(this).css("display") == "none") $(this).slideDown(); 
+        if ($(this).css("display") == "none") $(this).show(); 
+      });
+    });
+
+
+    $(".block").mouseleave(function () {
+      $(".opt").each(function () {
+        if ($(this).css("display") !== "none") $(this).hide(); 
       });
     });
 
