@@ -48,6 +48,11 @@ header .survey {
   cursor: pointer;
 }
 
+header .survey:hover {
+  color: #004b6a;
+  background-color: #FFF;
+}
+
 .right-opts {
   color: #4BAEFF;
   font-weight: 700;
@@ -59,8 +64,16 @@ header .survey {
   padding: 10px 12px 10px 12px;
 }
 
+.right-opts .opt:hover {
+  color: #004b6a;
+}
+
 .right-opts .opt.inverse {
   color: #004b6a;
+}
+
+.right-opts .opt.inverse:hover {
+  color: #4BAEFF;
 }
 
 .back {
