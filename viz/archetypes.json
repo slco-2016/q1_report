@@ -1,6 +1,6 @@
 {"name": "Archetypes", "children": [
 
-  {"name": "Motivated", 
+  {"name": "Achievement Focused", 
     "quotes": [
       "Motivated to put supervision and the justice system behind them.",
       "Most likely they have some positive social support from friends or family.",
@@ -123,7 +123,7 @@
 
   ]},
 
-  {"name": "Consequence-focused", 
+  {"name": "Consequence Focused", 
     "quotes": [
       "Has family support, and are able to remember appointments and clear on what’s expected of them.",
       "Usually in their early 20's.",

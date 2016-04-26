@@ -55,13 +55,14 @@
       baseData = d;
       Object.keys(d[0]).forEach(function (ea) {
         ea = ea.split("_");
-        if (!opts[ea[0]]) {
-          opts[ea[0]] = []; 
-          $("#arch-dd").append("<p onclick='generateData(\"" + String(ea[0]) + "\", null)'>" + cleanName(String(ea[0])) + "</p>");
+        if (ea[0] !== "excercise" || ea[0] !== "descriptor") {
+          if (!opts[ea[0]]) {
+            opts[ea[0]] = []; 
+            $("#arch-dd").append("<p onclick='generateData(\"" + String(ea[0]) + "\", null)'>" + cleanName(String(ea[0])) + "</p>");
+          }
+          if (opts[ea[0]].indexOf(ea[1]) == -1) opts[ea[0]].push(ea[1]);
         }
-        if (opts[ea[0]].indexOf(ea[1]) == -1) opts[ea[0]].push(ea[1]);
       });
-      console.log(opts);
       generateData("schedule", "conflicts");
     }
 
@@ -191,7 +192,7 @@
 
       if (n == "attitude") { return "Attitudes"; }
       if (n == "familyfriends") { return "Family, Friends"; }
-      if (n == "status") { return "Life Status"; }
+      if (n == "status") { return "Status"; }
       if (n == "cjs") { return "Criminal Justice Services Relationship"; }
       if (n == "personal") { return "Health and Personal Issues"; }
       if (n == "demographics") { return "Demographics"; }
