@@ -55,7 +55,7 @@
       baseData = d;
       Object.keys(d[0]).forEach(function (ea) {
         ea = ea.split("_");
-        if (ea[0] !== "excercise" || ea[0] !== "descriptor") {
+        if (ea[0] !== "excercise" && ea[0] !== "descriptor") {
           if (!opts[ea[0]]) {
             opts[ea[0]] = []; 
             $("#arch-dd").append("<p onclick='generateData(\"" + String(ea[0]) + "\", null)'>" + cleanName(String(ea[0])) + "</p>");
