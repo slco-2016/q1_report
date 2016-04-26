@@ -102,7 +102,7 @@
         if (newData[v] > 0) {
           reconfigured.push({
             xval: v,
-            yval: newData[v]
+            yval: Math.round(newData[v]/2)
           })
         }
       };
