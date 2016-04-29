@@ -102,7 +102,7 @@ header .survey:hover {
   cursor: pointer;
 }
 
-.header .opt.selected {
+.header .opt:hover, .header .opt.selected {
   background-color: #4BAEFF;
   color: #FFF;
 }
