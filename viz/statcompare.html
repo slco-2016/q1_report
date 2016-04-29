@@ -81,8 +81,10 @@
           k = k.split("_");
           if (k[0] == arch) {
             if (newSubOpts.indexOf(k[1]) == -1) {
-              newSubOpts.push(k[1]);
-              $("#sub-dd").append("<p onclick='generateData(\"" + String(k[0]) + "\", \"" + String(k[1]) + "\")'>" + cleanName(String(k[1])) + "</p>");
+              if (k[1] !== "quote" && k[1] !== "keys" && k[1] !== "names") {
+                newSubOpts.push(k[1]);
+                $("#sub-dd").append("<p onclick='generateData(\"" + String(k[0]) + "\", \"" + String(k[1]) + "\")'>" + cleanName(String(k[1])) + "</p>");
+              }
             }
 
             if (sub) { if (k[1] == sub) ok = true; }
@@ -92,10 +94,14 @@
         });
         keys.forEach(function (k) {
           k2 = k.split("_")[2];
-          if (!newData[k2]) newData[k2] = 0;
-          if (!isNaN(Number(ea[k]))) newData[k2] += Number(ea[k]);
+          if (k2 !== "esttimesthroughsys") {
+            if (!newData[k2]) newData[k2] = 0;
+            if (!isNaN(Number(ea[k]))) newData[k2] += Number(ea[k]);
+          }
         });
       });
+
+      if (newSubOpts.length == 1) $("#sub-name").text(cleanName(newSubOpts[0]));
 
       var reconfigured = [];
       for (var v in newData) {
@@ -189,7 +195,7 @@
       if (n == "attitude") { return "Attitudes"; }
       if (n == "familyfriends") { return "Family, Friends"; }
       if (n == "status") { return "Status"; }
-      if (n == "cjs") { return "Criminal Justice Services Relationship"; }
+      if (n == "cjs") { return "CJS Relationship"; }
       if (n == "personal") { return "Health and Personal Issues"; }
       if (n == "demographics") { return "Demographics"; }
       if (n == "technology") { return "Technology"; }
@@ -225,7 +231,7 @@
       if (n == "ios") { return "iOS"; }
       if (n == "savvy") { return "Considered 'Tech Savvy'"; }
       if (n == "feepayment") { return "Fee Payment"; }
-      if (n == "pastanklemonitor") { return "Has or Does Have Ankle Monitor"; }
+      if (n == "pastanklemonitor") { return "Has/had Ankle Monitor"; }
       if (n == "multiplecases") { return "Multiple Concurrent Cases"; }
       if (n == "multipletimesthroughsystem") { return "Multiple Times Through System"; }
       if (n == "recdrugsalcohol") { return "Recreational Drug or Alcohol Use"; }
