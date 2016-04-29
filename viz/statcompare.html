@@ -163,7 +163,8 @@
       .selectAll("text")
         .style("text-anchor", "middle")
         .attr("fill", "white")
-        .attr("dy", "1em");
+        .attr("y", function (d, i) { return "-" + (data[i].yval * 0.9 + 3) + "%"; })
+        // .attr("dy", "1em");
 
       svg.append("g")
         .attr("class", "y axis")
