@@ -268,8 +268,9 @@
 
       // update the width of the svg
       try { 
-        var newWidth = Math.max(width, d3.select("g")[0][0].getBBox().width + 500);
+        var newWidth = Math.max(width, d3.select("g")[0][0].getBBox().width + 800);
         d3.select("svg").style("width", newWidth + "px"); 
+         $(".svgWrap").animate({scrollLeft: $(".svgWrap").scrollLeft() + 800}, 800);
       } catch (e) { console.log(e); }
 
     };
