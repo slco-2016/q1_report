@@ -169,14 +169,14 @@
     });
 
     function update(source) {
-      modBaseText(source);
+      source = modBaseText(source);
 
       // Compute the new tree layout.
       var nodes = tree.nodes(root).reverse(),
           links = tree.links(nodes);
 
       // Normalize for fixed-depth.
-      nodes.forEach(function(d) { d.y = d.depth * 300; });
+      nodes.forEach(function(d) { d.y = d.depth * 500; });
 
       // Update the nodes…
       var node = svg.selectAll("g.node")
@@ -268,7 +268,6 @@
 
       // update the width of the svg
       try { 
-        console.log(d3.select("g")[0][0].getBBox().width)
         var newWidth = Math.max(width, d3.select("g")[0][0].getBBox().width + 500);
         d3.select("svg").style("width", newWidth + "px"); 
       } catch (e) { console.log(e); }
@@ -292,19 +291,14 @@
     };
 
     function modBaseText (source) {
-      console.log(source);
-      if (source.depth == 1) { 
-        $("#title-category").text(source.name); 
-        $("#title-subcat").text("Sub-category"); 
-        $("#category").html(source.quotes.join("<br>")); 
-        $("#subcat").text("");
-      } else if (source.depth == 2) {
-        $("#title-category").text(source.parent.name); 
-        $("#title-subcat").text(source.name); 
-        $("#category").html(source.parent.quotes.join("<br>")); 
-        $("#subcat").html("<i>\"" + source.quotes.join("\"</i><br><i>\"") + "\"</i>"); 
+      if (source.depth == 3) {
+        source.children = source.children.map(function (ea) {
+          ea.name = "Goal: " + ea.name;
+          return ea;
+        });
       }
-    }
+      return source
+    };
 
   </script>
 
