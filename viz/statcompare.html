@@ -237,7 +237,7 @@
       if (n == "multipletimesthroughsystem") { return "Multiple Times Through System"; }
       if (n == "recdrugsalcohol") { return "Recreational Drug or Alcohol Use"; }
       if (n == "dcfs") { return "Has 2nd Case Manager with DCFS"; }
-      if (n == "childsupport") { return "Child Support"; }
+      if (n == "childsupport") { return "Owes Child Support"; }
       if (n == "infostercare") { return "Has Child in Foster Care"; }
       if (n == "haschildren") { return "Has Children"; }
       if (n == "livingsituation") { return "Living Situation"; }
@@ -248,6 +248,11 @@
       if (n == "quietcompletion") { return "Quiet Supervision Completion"; }
       if (n == "socialties") { return "Social Ties"; }
       if (n == "family") { return "Reunite with Family"; }
+
+      if (n == "girlboyfriend") { return "Significant Other"; }
+      if (n == "marriage") { return "Married"; }
+      if (n == "positive") { return "Positive Social Ties"; }
+      if (n == "negative") { return "Negative Social Ties"; }
 
       else { 
         n = n[0].toUpperCase() + n.slice(1, n.length)
