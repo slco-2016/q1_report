@@ -255,6 +255,10 @@
       if (n == "positive") { return "Positive Social Ties"; }
       if (n == "negative") { return "Negative Social Ties"; }
 
+      if (n == "firsttime") { return "First Time"; }
+      if (n == "stable") { return "Stable Job"; }
+      if (n == "any") { return "Any Job"; }
+
       else { 
         n = n[0].toUpperCase() + n.slice(1, n.length)
         return n; 

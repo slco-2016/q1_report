@@ -300,26 +300,42 @@
     };
 
     function modBaseText (source) {
-      if (source.depth == 3) {
+      if (source.depth == 1) { 
+        $("#title-category").text(source.name); 
+        $("#title-subcat").text("Sub-category"); 
+        $("#category").html(source.quotes.join("<br>")); 
+        $("#subcat").text("");
+        source.children = source.children.map(function (ea) {
+          ea.name = "Trait: " + ea.name;
+          return ea;
+        });
+      } else if (source.depth == 2) {
+        $("#title-category").text(source.parent.name); 
+        $("#title-subcat").text(source.name); 
+        $("#category").html(source.parent.quotes.join("<br>")); 
+        $("#subcat").html("<i>\"" + source.quotes.join("\"</i><br><i>\"") + "\"</i>"); 
         source.children = source.children.map(function (ea) {
           ea.name = "Goal: " + ea.name;
+          return ea;
+        });
+      } else if (source.depth == 3) {
+        source.children = source.children.map(function (ea) {
+          ea.name = "Character Quote: " + ea.name;
           return ea;
         });
       }
       return source
     };
 
+
+    // google analytics
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-77005200-1', 'auto');
+    ga('send', 'pageview');
+
   </script>
-
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-77005200-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
 </html>
