@@ -315,12 +315,12 @@
         $("#category").html(source.parent.quotes.join("<br>")); 
         $("#subcat").html("<i>\"" + source.quotes.join("\"</i><br><i>\"") + "\"</i>"); 
         source.children = source.children.map(function (ea) {
-          ea.name = "Goal: " + ea.name;
+          ea.name = "Character Quote: " + ea.name;
           return ea;
         });
       } else if (source.depth == 3) {
         source.children = source.children.map(function (ea) {
-          ea.name = "Character Quote: " + ea.name;
+          ea.name = "Goal: " + ea.name;
           return ea;
         });
       }
